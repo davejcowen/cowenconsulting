@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cowen Consulting — Executive engineering leadership, built from the keyboard up</title>
+<meta name="description" content="David Cowen is a technology executive who started as a software engineer and rose to CTO of a $1.1B+ portfolio. Fractional CTO, technical due diligence, and engineering leadership for companies that need it now.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F4F6;
+  --surface:#FFFFFF;
+  --ink:#15171D;
+  --ink-soft:#3A3E48;
+  --muted:#646A77;
+  --line:rgba(21,23,29,.10);
+  --line-soft:rgba(21,23,29,.06);
+  --accent:#3A2DDB;
+  --accent-soft:#EEEBFD;
+  --accent-ink:#2A1FA8;
+  --radius:14px;
+  --maxw:1140px;
+  --display:'Bricolage Grotesque',system-ui,sans-serif;
+  --sans:'Inter',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--mono)}
+
+header.nav{position:sticky;top:0;z-index:50;background:rgba(243,244,246,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{font-family:var(--display);font-weight:700;font-size:1.22rem;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:.92rem;color:var(--ink-soft);transition:color .15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{font-family:var(--sans);font-weight:500;font-size:.9rem;background:var(--ink);color:#fff;padding:9px 17px;border-radius:9px;transition:transform .12s,background .15s}
+.nav-cta:hover{background:var(--accent);transform:translateY(-1px)}
+.menu-btn{display:none;background:none;border:none;cursor:pointer;font-family:var(--mono);font-size:.82rem;color:var(--ink)}
+
+.hero{position:relative;padding:88px 0 72px;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;z-index:0;background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse 80% 60% at 30% 0%,#000 40%,transparent 78%);mask-image:radial-gradient(ellipse 80% 60% at 30% 0%,#000 40%,transparent 78%);opacity:.7}
+.hero-inner{position:relative;z-index:1;max-width:900px}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-ink);display:inline-flex;align-items:center;gap:9px;margin-bottom:26px}
+.eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(58,45,219,.45)}70%{box-shadow:0 0 0 8px rgba(58,45,219,0)}100%{box-shadow:0 0 0 0 rgba(58,45,219,0)}}
+h1.hero-title{font-family:var(--display);font-weight:600;font-size:clamp(2.5rem,6.2vw,4.4rem);line-height:1.04;letter-spacing:-.035em;margin-bottom:24px}
+h1.hero-title .em{color:var(--accent)}
+.hero-sub{font-size:clamp(1.05rem,2vw,1.26rem);color:var(--ink-soft);max-width:62ch;margin-bottom:18px;line-height:1.6}
+.term{font-family:var(--mono);font-size:.86rem;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 15px;display:inline-flex;align-items:center;gap:6px;margin-bottom:34px;max-width:100%;overflow:hidden}
+.term .typed{color:var(--ink-soft);white-space:nowrap}
+.term .cursor{display:inline-block;width:8px;height:1.05em;background:var(--accent);margin-left:1px;animation:blink 1.05s steps(1) infinite;vertical-align:text-bottom}
+@keyframes blink{50%{opacity:0}}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn-primary{font-weight:500;font-size:1rem;background:var(--accent);color:#fff;padding:14px 26px;border-radius:11px;transition:transform .12s,box-shadow .2s;box-shadow:0 1px 2px rgba(42,31,168,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(58,45,219,.5)}
+.btn-ghost{font-weight:500;font-size:1rem;color:var(--ink);padding:14px 22px;border-radius:11px;border:1px solid var(--line);transition:border-color .15s,background .15s}
+.btn-ghost:hover{border-color:var(--ink);background:var(--surface)}
+
+.proof{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);background:var(--surface)}
+.proof-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.proof-item{padding:30px 24px;border-right:1px solid var(--line-soft)}
+.proof-item:last-child{border-right:none}
+.proof-item .n{font-family:var(--display);font-weight:600;font-size:2rem;letter-spacing:-.02em;line-height:1}
+.proof-item .l{font-size:.84rem;color:var(--muted);margin-top:7px}
+
+.clients{background:var(--surface);border-bottom:1px solid var(--line-soft);padding:26px 0}
+.clients .ctitle{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:18px}
+.client-row{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 34px;align-items:center}
+.client-row span{font-family:var(--display);font-weight:600;font-size:1.05rem;color:var(--ink-soft);letter-spacing:-.01em;opacity:.78}
+
+section.block{padding:90px 0}
+.sec-head{max-width:730px;margin-bottom:50px}
+.sec-tag{font-family:var(--mono);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:16px;display:block}
+.sec-title{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.1;letter-spacing:-.025em;margin-bottom:16px}
+.sec-intro{font-size:1.08rem;color:var(--ink-soft);line-height:1.6}
+
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.svc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;transition:transform .18s,border-color .18s,box-shadow .18s}
+.svc:hover{transform:translateY(-3px);border-color:rgba(58,45,219,.35);box-shadow:0 18px 40px -22px rgba(21,23,29,.3)}
+.svc .num{font-family:var(--mono);font-size:.78rem;color:var(--accent);margin-bottom:18px}
+.svc h3{font-family:var(--display);font-weight:600;font-size:1.32rem;letter-spacing:-.01em;margin-bottom:9px}
+.svc .tease{font-weight:500;color:var(--accent-ink);font-size:.98rem;margin-bottom:11px}
+.svc p{color:var(--muted);font-size:.96rem;line-height:1.62}
+
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.work{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;min-height:262px;transition:transform .18s,box-shadow .18s}
+.work:hover{transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(21,23,29,.3)}
+.work .wtag{font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;color:var(--muted);text-transform:uppercase;margin-bottom:16px;line-height:1.4}
+.work h4{font-family:var(--display);font-weight:600;font-size:1.16rem;line-height:1.25;margin-bottom:10px;letter-spacing:-.01em}
+.work p{color:var(--muted);font-size:.92rem;line-height:1.58;flex:1}
+.work .metric{margin-top:18px;padding-top:16px;border-top:1px solid var(--line-soft);font-family:var(--display);font-weight:600;font-size:1.5rem;letter-spacing:-.02em}
+.work .metric span{font-family:var(--sans);font-weight:400;font-size:.82rem;color:var(--muted);display:block;letter-spacing:0;margin-top:2px}
+
+.patent-strip{margin-top:18px;background:var(--ink);color:#fff;border-radius:var(--radius);padding:30px 32px;display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.patent-strip .pl{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:#9a91ee;flex-shrink:0}
+.patent-strip p{font-size:1.04rem;line-height:1.5;color:rgba(255,255,255,.86);flex:1;min-width:280px}
+.patent-strip b{color:#fff;font-weight:500}
+
+.proc{background:var(--ink);color:#fff;border-radius:22px;padding:62px 56px;position:relative;overflow:hidden}
+.proc::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:40px 40px;-webkit-mask-image:radial-gradient(ellipse 70% 80% at 90% 10%,#000,transparent 70%);mask-image:radial-gradient(ellipse 70% 80% at 90% 10%,#000,transparent 70%)}
+.proc-inner{position:relative;z-index:1}
+.proc .sec-tag{color:#b9b2f5}
+.proc .sec-title{color:#fff}
+.proc-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:46px}
+.pstep .pn{font-family:var(--mono);font-size:.82rem;color:#8f86e8;margin-bottom:16px;padding-top:16px;border-top:2px solid rgba(255,255,255,.16)}
+.pstep h4{font-family:var(--display);font-weight:600;font-size:1.2rem;margin-bottom:9px}
+.pstep p{color:rgba(255,255,255,.62);font-size:.93rem;line-height:1.6}
+
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:56px;align-items:start}
+.about-body p{font-size:1.08rem;color:var(--ink-soft);line-height:1.7;margin-bottom:20px}
+.about-body p.lead{font-size:1.34rem;color:var(--ink);font-weight:400;line-height:1.5}
+.about-side{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.about-side h5{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.about-side h5.mt{margin-top:24px}
+.skill-row{display:flex;flex-wrap:wrap;gap:8px}
+.skill{font-family:var(--mono);font-size:.78rem;padding:6px 11px;background:var(--accent-soft);color:var(--accent-ink);border-radius:8px}
+.about-side .metas{margin-top:8px}
+.about-side .meta{font-size:.92rem;color:var(--ink-soft);padding:9px 0;border-top:1px solid var(--line-soft);display:flex;justify-content:space-between;gap:12px}
+.about-side .meta b{font-weight:500;color:var(--ink);text-align:right}
+
+.final{text-align:center;padding:94px 0}
+.final h2{font-family:var(--display);font-weight:600;font-size:clamp(2rem,4.5vw,3.3rem);letter-spacing:-.03em;line-height:1.08;margin-bottom:20px}
+.final p{font-size:1.15rem;color:var(--ink-soft);max-width:52ch;margin:0 auto 16px}
+.final .contact-line{font-family:var(--mono);font-size:.95rem;color:var(--muted);margin-bottom:32px}
+.final .contact-line a{color:var(--accent-ink)}
+.final .hero-cta{justify-content:center}
+
+footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--surface)}
+.foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.foot-inner .fbrand{font-family:var(--display);font-weight:600;font-size:1.05rem}
+.foot-inner .fmeta{font-size:.86rem;color:var(--muted)}
+.foot-links{display:flex;gap:22px;font-size:.9rem;color:var(--ink-soft)}
+.foot-links a:hover{color:var(--accent)}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:880px){
+  .nav-links{display:none}
+  .menu-btn{display:block}
+  .nav-links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:18px 28px;gap:18px;align-items:flex-start}
+  .proof-grid{grid-template-columns:repeat(2,1fr)}
+  .proof-item:nth-child(2){border-right:none}
+  .proof-item:nth-child(1),.proof-item:nth-child(2){border-bottom:1px solid var(--line-soft)}
+  .svc-grid{grid-template-columns:1fr}
+  .work-grid{grid-template-columns:1fr}
+  .proc{padding:44px 26px;border-radius:16px}
+  .proc-steps{grid-template-columns:1fr 1fr;gap:24px}
+  .about-grid{grid-template-columns:1fr;gap:34px}
+  .patent-strip{padding:24px}
+}
+@media (max-width:520px){
+  .proc-steps{grid-template-columns:1fr}
+  .hero{padding:58px 0 54px}
+  section.block{padding:64px 0}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand"><span class="dot"></span>Cowen</a>
+    <nav class="nav-links" id="navlinks">
+      <a href="#expertise">Expertise</a>
+      <a href="#track">Track record</a>
+      <a href="#process">How I help</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="nav-cta">Book a call</a>
+    </nav>
+    <button class="menu-btn" id="menubtn" aria-label="Menu">menu</button>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <span class="eyebrow"><span class="pulse"></span>Senior technology executive · Fractional CTO &amp; advisor</span>
+    <h1 class="hero-title">Engineering leadership,<br>built from the <span class="em">keyboard up.</span></h1>
+    <p class="hero-sub">I'm Dave Cowen. I started as a software engineer and spent 25 years rising to CTO — today I lead global engineering for a $1.1B+ portfolio. I help companies turn engineering into a competitive advantage: as a fractional CTO, a technical due-diligence partner, and the executive who's done it at scale.</p>
+    <div class="term"><span class="mono" style="color:var(--muted)">available&nbsp;for:</span>&nbsp;<span class="typed" id="typed"></span><span class="cursor"></span></div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Start a conversation</a>
+      <a href="#track" class="btn-ghost">See the track record</a>
+    </div>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="wrap">
+    <div class="proof-grid">
+      <div class="proof-item"><div class="n">25+</div><div class="l">Years in engineering leadership</div></div>
+      <div class="proof-item"><div class="n">$1.1B+</div><div class="l">Revenue portfolio supported</div></div>
+      <div class="proof-item"><div class="n">$40M</div><div class="l">R&amp;D budget led</div></div>
+      <div class="proof-item"><div class="n">96%</div><div class="l">On-time delivery, from sub-60%</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="clients">
+  <div class="wrap">
+    <div class="ctitle">Held executive accountability for enterprise accounts including</div>
+    <div class="client-row">
+      <span>US Bank</span><span>Citibank</span><span>NTT Japan</span><span>Cleveland Clinic</span><span>Vanderbilt</span><span>Commonwealth Bank</span>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="expertise">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Where I help</span>
+      <h2 class="sec-title">Executive engineering leadership, for a season.</h2>
+      <p class="sec-intro">Most companies don't need another full-time VP — they need someone who's already solved the problem in front of them. These are the engagements where 25 years of scaling, shipping, and integrating pays for itself fast.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal">
+        <div class="num">01</div>
+        <h3>Fractional &amp; interim CTO</h3>
+        <div class="tease">Executive leadership without the full-time hire.</div>
+        <p>I step in as the technology executive who's done it at scale — setting strategy, fixing delivery, aligning R&amp;D spend to the business, and building the team that ships. For companies between CTOs, scaling fast, or carrying more engineering risk than their leadership bench can cover.</p>
+      </div>
+      <div class="svc reveal">
+        <div class="num">02</div>
+        <h3>Technical due diligence &amp; M&amp;A</h3>
+        <div class="tease">Know what you're buying — and make it work after.</div>
+        <p>I've run diligence on acquisition targets and integrated five companies post-close. I assess the real state of a target's technology, team, and risk before you sign, then lead the integration work that decides whether the deal actually pays off.</p>
+      </div>
+      <div class="svc reveal">
+        <div class="num">03</div>
+        <h3>Global engineering org scaling</h3>
+        <div class="tease">Build the team and the system that delivers.</div>
+        <p>I've built engineering centers from zero — including one that grew to 252 engineers and now contributes core IP worldwide. I help you stand up, scale, and structure distributed teams, and install the SDLC discipline that makes on-time delivery a habit, not a hope.</p>
+      </div>
+      <div class="svc reveal">
+        <div class="num">04</div>
+        <h3>AI data center &amp; infrastructure strategy</h3>
+        <div class="tease">Engineering leadership for the AI-infrastructure era.</div>
+        <p>Deep experience across DCIM, building automation, and high-density cooling — including a pending Direct-to-Chip patent aimed squarely at AI thermal loads. I advise teams building or modernizing data center and infrastructure products for where the market is heading, not where it's been.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="track" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Track record</span>
+      <h2 class="sec-title">Outcomes, not titles.</h2>
+      <p class="sec-intro">A leader is only as good as what shipped. A few that did — at the scale where being wrong is expensive.</p>
+    </div>
+    <div class="work-grid">
+      <div class="work reveal">
+        <div class="wtag">Flagship platform · Emerson / Vertiv</div>
+        <h4>Delivered the Trellis DCIM platform on schedule</h4>
+        <p>Led every aspect of development for Emerson's flagship data center infrastructure product across a 360-developer global team — delivered in under 18 months. The base platform remains in active commercial use today.</p>
+        <div class="metric">$125M<span>360 developers · delivered &lt;18 months</span></div>
+      </div>
+      <div class="work reveal">
+        <div class="wtag">Org build · Pune, India</div>
+        <h4>Built an engineering center from zero</h4>
+        <p>Stood up Vertiv's Pune center from initial leadership recruitment through facility build-out and global SDLC integration. Today it's a strategic capability contributing core IP to products worldwide.</p>
+        <div class="metric">0 → 252<span>engineers, built from scratch</span></div>
+      </div>
+      <div class="work reveal">
+        <div class="wtag">Turnaround · Carrier / Automated Logic</div>
+        <h4>Took on-time delivery from broken to dependable</h4>
+        <p>Redesigned the SDLC, instituted requirements-gating discipline, and aligned hiring and retention — lifting on-time delivery above 96% and sustaining it for three consecutive years.</p>
+        <div class="metric">60% → 96%<span>on-time delivery · 3 yrs sustained</span></div>
+      </div>
+    </div>
+    <div class="patent-strip reveal">
+      <span class="pl">Patents &amp; innovation</span>
+      <p>Named inventor on multiple data center patents — including the <b>Vertiv Intelligence Engine</b>, still powering production DCIM and IoT solutions, and a pending <b>Direct-to-Chip cooling system</b> built for the thermal loads of AI workloads.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="process" style="padding-top:20px">
+  <div class="wrap">
+    <div class="proc reveal">
+      <div class="proc-inner">
+        <span class="sec-tag">How I help</span>
+        <h2 class="sec-title">Right-sized to the problem. No long ramp.</h2>
+        <div class="proc-steps">
+          <div class="pstep">
+            <div class="pn">01 — Fit call</div>
+            <h4>Make sure I'm right</h4>
+            <p>A short conversation to confirm I'm the right person for your problem. If I'm not, I'll tell you and point you somewhere better.</p>
+          </div>
+          <div class="pstep">
+            <div class="pn">02 — Assessment</div>
+            <h4>Get the real picture</h4>
+            <p>A focused diagnostic of your org, product, or acquisition target — and a clear read on what's working and what isn't.</p>
+          </div>
+          <div class="pstep">
+            <div class="pn">03 — Engagement</div>
+            <h4>Lead or advise</h4>
+            <p>Fractional leadership, an advisory cadence, or a defined diligence and integration scope. Sized to what you actually need.</p>
+          </div>
+          <div class="pstep">
+            <div class="pn">04 — Outcomes</div>
+            <h4>Leave it better</h4>
+            <p>Delivery back on track, a healthier org, a confident go/no-go, a roadmap your team can run without me.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="about" style="padding-top:20px">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-body reveal">
+        <span class="sec-tag">About</span>
+        <p class="lead">I've sat in nearly every seat in engineering — from writing COBOL and device drivers to leading global organizations as a CTO. That full arc is the point: I lead technology from a foundation of having actually built it.</p>
+        <p>Over 25 years I rose from individual contributor to Senior Director reporting to the CTO, and today serve as CTO and VP of Engineering for Carrier's Automated Logic, Nlyte, Abound, and UTEC OEM businesses — a $1.1B+ portfolio with a $40M R&amp;D budget and multidisciplinary teams across the US, India, the UK, and Romania.</p>
+        <p>Along the way I delivered a $125M, 360-developer DCIM platform in under 18 months, built an engineering center from zero to 252 people, drove on-time delivery from below 60% to above 96%, and came through five acquisitions as the person each new owner asked to stay. I'm a named inventor on multiple data center patents, including a pending Direct-to-Chip cooling system for the AI era.</p>
+        <p>Now I bring that experience to companies that need executive engineering leadership for a season — to scale, to turn delivery around, to evaluate an acquisition, or to navigate the AI-infrastructure shift — without committing to a full-time hire.</p>
+      </div>
+      <aside class="about-side reveal">
+        <h5>Leadership &amp; strategy</h5>
+        <div class="skill-row">
+          <span class="skill">Fractional / Interim CTO</span>
+          <span class="skill">M&amp;A Due Diligence</span>
+          <span class="skill">Post-Merger Integration</span>
+          <span class="skill">Global Org Scaling</span>
+          <span class="skill">R&amp;D Portfolio Strategy</span>
+          <span class="skill">Operational Excellence</span>
+          <span class="skill">P&amp;L-Aware Engineering</span>
+        </div>
+        <h5 class="mt">Technical fluency</h5>
+        <div class="skill-row">
+          <span class="skill">Cloud / IoT / Edge</span>
+          <span class="skill">Microservices</span>
+          <span class="skill">Agile / DevOps / CI-CD</span>
+          <span class="skill">DCIM &amp; Data Center Infra</span>
+          <span class="skill">Cooling &amp; Thermal</span>
+          <span class="skill">SOC2 / CMMC / ISO</span>
+        </div>
+        <div class="metas">
+          <div class="meta"><span>Based in</span><b>Acworth, GA</b></div>
+          <div class="meta"><span>Engagements</span><b>Fractional · advisory · diligence</b></div>
+          <div class="meta"><span>Patents</span><b>Data center &amp; cooling</b></div>
+          <div class="meta"><span>Response</span><b>Within 1 business day</b></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="contact">
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Have a problem worth<br>a seasoned hand?</h2>
+      <p>Whether it's a delivery turnaround, an acquisition to evaluate, a team to scale, or a CTO seat to fill for a while — tell me what you're facing.</p>
+      <div class="contact-line"><a href="mailto:dave@kdcowen.com">dave@kdcowen.com</a> &nbsp;·&nbsp; <a href="tel:+19544392199">954.439.2199</a> &nbsp;·&nbsp; Acworth, GA</div>
+      <div class="hero-cta">
+        <a href="mailto:dave@kdcowen.com" class="btn-primary">Email Dave</a>
+        <a href="https://www.linkedin.com/in/davidjcowen" class="btn-ghost">Connect on LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div>
+      <div class="fbrand">Cowen Consulting</div>
+      <div class="fmeta">Executive engineering leadership, built from the keyboard up.</div>
+    </div>
+    <div class="foot-links">
+      <a href="https://www.linkedin.com/in/davidjcowen">LinkedIn</a>
+      <a href="mailto:dave@kdcowen.com">Email</a>
+      <a href="tel:+19544392199">Call</a>
+    </div>
+    <div class="fmeta">© <span id="yr"></span> David J. Cowen</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var phrases=['fractional & interim CTO roles','technical due diligence on acquisitions','scaling global engineering teams','delivery & operational turnarounds','AI data center & infrastructure strategy'];
+  var el=document.getElementById('typed');
+  var pi=0,ci=0,deleting=false;
+  function tick(){
+    var p=phrases[pi];
+    if(!deleting){el.textContent=p.slice(0,ci+1);ci++;if(ci===p.length){deleting=true;return setTimeout(tick,1800);}}
+    else{el.textContent=p.slice(0,ci-1);ci--;if(ci===0){deleting=false;pi=(pi+1)%phrases.length;}}
+    setTimeout(tick,deleting?32:60);
+  }
+  if(el && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){tick();}
+  else if(el){el.textContent=phrases[0];}
+
+  var mb=document.getElementById('menubtn'),nl=document.getElementById('navlinks');
+  mb&&mb.addEventListener('click',function(){nl.classList.toggle('open');});
+  nl&&nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nl.classList.remove('open');});});
+
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(function(n){io.observe(n);});
+
+  document.getElementById('yr').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
