@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cowen Consulting — Executive engineering leadership, built from the keyboard up</title>
-<meta name="description" content="David Cowen is a technology executive who started as a software engineer and rose to CTO of a $1.1B+ portfolio. Fractional CTO, technical due diligence, and engineering leadership for companies that need it now.">
+<title>Cowen Leadership Consulting — Executive engineering leadership for the AI-infrastructure era</title>
+<meta name="description" content="David Cowen is a technology executive who rose from software engineer to CTO of a $1.1B+ portfolio across five acquisitions. Fractional CTO, M&A technical due diligence, and data center / AI-infrastructure leadership — from ERP digital transformation to DCIM, thermal, and energy management.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -20,6 +20,9 @@
   --accent:#3A2DDB;
   --accent-soft:#EEEBFD;
   --accent-ink:#2A1FA8;
+  --signal:#0FB9A6;
+  --signal-ink:#0A7567;
+  --signal-soft:#E3F7F3;
   --radius:14px;
   --maxw:1140px;
   --display:'Bricolage Grotesque',system-ui,sans-serif;
@@ -139,6 +142,48 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
 .foot-links{display:flex;gap:22px;font-size:.9rem;color:var(--ink-soft)}
 .foot-links a:hover{color:var(--accent)}
 
+/* AI hero motif */
+.ai-net{position:absolute;top:0;right:0;width:58%;height:100%;z-index:0;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 38%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 38%,#000 88%,transparent);opacity:.85}
+.eyebrow .pulse{background:var(--signal)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(15,185,166,.45)}70%{box-shadow:0 0 0 8px rgba(15,185,166,0)}100%{box-shadow:0 0 0 0 rgba(15,185,166,0)}}
+
+/* Digital transformation arc */
+.arc-band{background:var(--surface);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.arc-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:30px}
+.arc-head .sec-tag{margin-bottom:0}
+.arc-head .ah-sub{font-size:.98rem;color:var(--muted)}
+.arc{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap}
+.arc-step{flex:1;min-width:150px;position:relative;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:18px 18px 20px}
+.arc-step .as-i{font-family:var(--mono);font-size:.72rem;color:var(--accent);margin-bottom:9px}
+.arc-step h4{font-family:var(--display);font-weight:600;font-size:1.04rem;letter-spacing:-.01em;line-height:1.2;margin-bottom:6px}
+.arc-step p{font-size:.84rem;color:var(--muted);line-height:1.5}
+.arc-step:nth-child(n+4){border-color:rgba(15,185,166,.4)}
+.arc-step:nth-child(n+4) .as-i{color:var(--signal-ink)}
+.arc-step:not(:last-child)::after{content:'';position:absolute;right:-10px;top:50%;width:10px;height:2px;background:var(--line);z-index:1}
+.arc-foot{margin-top:22px;font-size:.96rem;color:var(--ink-soft);max-width:78ch}
+.arc-foot b{color:var(--ink);font-weight:600}
+
+/* Acquisitions timeline */
+.tl-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.tl-stat{flex-shrink:0;text-align:right}
+.tl-stat .n{font-family:var(--display);font-weight:600;font-size:2.1rem;letter-spacing:-.02em;line-height:1;background:linear-gradient(100deg,var(--accent),var(--signal-ink));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.tl-stat .l{font-size:.82rem;color:var(--muted);margin-top:6px}
+.timeline{position:relative;margin-top:54px}
+.timeline::before{content:'';position:absolute;top:7px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--signal));opacity:.55}
+.tl-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.tl-item{position:relative;padding-top:34px}
+.tl-item::before{content:'';position:absolute;top:0;left:0;width:16px;height:16px;border-radius:50%;background:var(--surface);border:2px solid var(--accent);box-shadow:0 0 0 4px var(--bg);transition:transform .18s}
+.tl-item:last-child::before{border-color:var(--signal);box-shadow:0 0 0 4px var(--bg),0 0 0 7px rgba(15,185,166,.22)}
+.tl-item:hover::before{transform:scale(1.18)}
+.tl-co{font-family:var(--display);font-weight:600;font-size:1.16rem;letter-spacing:-.01em;line-height:1.15;margin-bottom:3px}
+.tl-role{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:12px}
+.tl-item:last-child .tl-role{color:var(--signal-ink)}
+.tl-item p{font-size:.88rem;color:var(--muted);line-height:1.55}
+.tl-foot{margin-top:40px;background:var(--ink);color:#fff;border-radius:var(--radius);padding:26px 30px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.tl-foot .pl{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#7fe6d8;flex-shrink:0}
+.tl-foot p{font-size:1.02rem;line-height:1.55;color:rgba(255,255,255,.86);flex:1;min-width:280px}
+.tl-foot b{color:#fff;font-weight:500}
+
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
 
@@ -155,6 +200,14 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
   .proc-steps{grid-template-columns:1fr 1fr;gap:24px}
   .about-grid{grid-template-columns:1fr;gap:34px}
   .patent-strip{padding:24px}
+  .ai-net{width:42%;opacity:.45}
+  .tl-grid{grid-template-columns:1fr;gap:0}
+  .timeline::before{top:0;bottom:0;left:7px;right:auto;width:2px;height:auto}
+  .tl-item{padding-top:0;padding-left:34px;padding-bottom:30px}
+  .tl-item::before{top:2px}
+  .tl-item:last-child::before{box-shadow:0 0 0 4px var(--bg),0 0 0 7px rgba(15,185,166,.22)}
+  .tl-item:last-child{padding-bottom:0}
+  .arc-step:not(:last-child)::after{display:none}
 }
 @media (max-width:520px){
   .proc-steps{grid-template-columns:1fr}
@@ -171,10 +224,11 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <a href="#top" class="brand"><span class="dot"></span>Cowen</a>
+    <a href="#top" class="brand"><span class="dot"></span>Cowen&nbsp;<span style="font-weight:500;color:var(--muted)">Leadership</span></a>
     <nav class="nav-links" id="navlinks">
       <a href="#expertise">Expertise</a>
       <a href="#track">Track record</a>
+      <a href="#journey">Acquisitions</a>
       <a href="#process">How I help</a>
       <a href="#about">About</a>
       <a href="#contact" class="nav-cta">Book a call</a>
@@ -186,8 +240,9 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
 <main id="top">
 
 <section class="hero">
+  <canvas class="ai-net" id="ainet" aria-hidden="true"></canvas>
   <div class="wrap hero-inner">
-    <span class="eyebrow"><span class="pulse"></span>Senior technology executive · Fractional CTO &amp; advisor</span>
+    <span class="eyebrow"><span class="pulse"></span>Senior technology executive · CTO for the AI-infrastructure era</span>
     <h1 class="hero-title">Engineering leadership,<br>built from the <span class="em">keyboard up.</span></h1>
     <p class="hero-sub">I'm Dave Cowen. I started as a software engineer and spent 25 years rising to CTO — today I lead global engineering for a $1.1B+ portfolio. I help companies turn engineering into a competitive advantage: as a fractional CTO, a technical due-diligence partner, and the executive who's done it at scale.</p>
     <div class="term"><span class="mono" style="color:var(--muted)">available&nbsp;for:</span>&nbsp;<span class="typed" id="typed"></span><span class="cursor"></span></div>
@@ -254,6 +309,43 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
   </div>
 </section>
 
+<section class="arc-band">
+  <div class="wrap block" style="padding:64px 0">
+    <div class="arc-head reveal">
+      <span class="sec-tag">Data center journey</span>
+      <span class="ah-sub">The same transformation playbook, applied one layer deeper each time.</span>
+    </div>
+    <div class="arc reveal">
+      <div class="arc-step">
+        <div class="as-i">01</div>
+        <h4>ERP &amp; enterprise IT</h4>
+        <p>Digital transformation of core business systems — the discipline of running technology as a P&amp;L.</p>
+      </div>
+      <div class="arc-step">
+        <div class="as-i">02</div>
+        <h4>Data center IT</h4>
+        <p>From the application layer down to the infrastructure the business actually runs on.</p>
+      </div>
+      <div class="arc-step">
+        <div class="as-i">03</div>
+        <h4>DCIM</h4>
+        <p>Instrumenting the facility itself — assets, capacity, and operations as software.</p>
+      </div>
+      <div class="arc-step">
+        <div class="as-i">04</div>
+        <h4>Thermal &amp; cooling</h4>
+        <p>High-density and direct-to-chip cooling built for AI-class thermal loads.</p>
+      </div>
+      <div class="arc-step">
+        <div class="as-i">05</div>
+        <h4>Energy management</h4>
+        <p>Power, efficiency, and sustainability — the constraint that now defines AI scale.</p>
+      </div>
+    </div>
+    <p class="arc-foot reveal">Most leaders know one of these layers. I've delivered transformation across <b>all five</b> — carrying the same engineering and operational rigor from the ERP system of record down to the chip-level thermal design behind today's AI buildout.</p>
+  </div>
+</section>
+
 <section class="block" id="track" style="padding-top:20px">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -284,6 +376,55 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
     <div class="patent-strip reveal">
       <span class="pl">Patents &amp; innovation</span>
       <p>Named inventor on multiple data center patents — including the <b>Vertiv Intelligence Engine</b>, still powering production DCIM and IoT solutions, and a pending <b>Direct-to-Chip cooling system</b> built for the thermal loads of AI workloads.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="journey" style="padding-top:20px">
+  <div class="wrap">
+    <div class="tl-head reveal">
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="sec-tag">The through-line</span>
+        <h2 class="sec-title">Five owners. One constant.</h2>
+        <p class="sec-intro">Over 25 years my organization changed hands five times. Each acquisition brought new leadership, new mandates, and a new engineering culture to assimilate — and each new owner asked me to stay and lead the team through it.</p>
+      </div>
+      <div class="tl-stat">
+        <div class="n">5×</div>
+        <div class="l">Acquisitions navigated<br>without losing the team</div>
+      </div>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-grid">
+        <div class="tl-item">
+          <div class="tl-co">Equinox</div>
+          <div class="tl-role">Where it started</div>
+          <p>My first company to change hands — and the first time I had to fold an engineering team into a new operating model without losing delivery momentum.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-co">Avocent</div>
+          <div class="tl-role">New parent, bigger platform</div>
+          <p>A larger IT-management portfolio and a new leadership chain to align to. Retained and trusted to integrate engineering across the combined organization.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-co">Emerson Electric</div>
+          <div class="tl-role">Liebert / Network Power</div>
+          <p>Absorbed into a Fortune 100 industrial. New executives and enterprise rigor — where I scaled engineering and SDLC discipline across global sites.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-co">Platinum Equity</div>
+          <div class="tl-role">Private-equity carve-out</div>
+          <p>Carved out under PE ownership at speed. New board, new urgency — kept on to protect delivery, talent, and core IP straight through the separation.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-co">Vertiv</div>
+          <div class="tl-role">Today · publicly traded</div>
+          <p>The business that emerged, now public and a leader in AI-infrastructure. Five owners later, still the executive each new team asked to stay and lead.</p>
+        </div>
+      </div>
+    </div>
+    <div class="tl-foot reveal">
+      <span class="pl">Why it matters</span>
+      <p>New ownership tests whether an engineering org survives the transition. <b>I'm the leader who keeps teams intact, integrates the acquired ones, and keeps shipping</b> while everything above changes — exactly the steadiness an acquirer or a board needs when the org chart is in motion.</p>
     </div>
   </div>
 </section>
@@ -380,8 +521,8 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
 <footer>
   <div class="wrap foot-inner">
     <div>
-      <div class="fbrand">Cowen Consulting</div>
-      <div class="fmeta">Executive engineering leadership, built from the keyboard up.</div>
+      <div class="fbrand">Cowen Leadership Consulting</div>
+      <div class="fmeta">Executive engineering leadership for the AI-infrastructure era.</div>
     </div>
     <div class="foot-links">
       <a href="https://www.linkedin.com/in/davidjcowen">LinkedIn</a>
@@ -414,6 +555,45 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
   document.querySelectorAll('.reveal').forEach(function(n){io.observe(n);});
 
   document.getElementById('yr').textContent=new Date().getFullYear();
+
+  // AI neural-network hero motif
+  var cv=document.getElementById('ainet');
+  if(cv && cv.getContext){
+    var ctx=cv.getContext('2d'),W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2),nodes=[];
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function seed(){
+      nodes=[];var n=Math.round(Math.max(14,Math.min(30,W*H/26000)));
+      for(var i=0;i<n;i++){nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.16,vy:(Math.random()-.5)*.16,r:Math.random()*1.6+1.1});}
+    }
+    function resize(){
+      var p=cv.parentElement;W=cv.clientWidth;H=cv.clientHeight;
+      cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);seed();
+    }
+    function frame(){
+      ctx.clearRect(0,0,W,H);
+      for(var i=0;i<nodes.length;i++){
+        var a=nodes[i];
+        if(!reduce){a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;}
+        for(var j=i+1;j<nodes.length;j++){
+          var b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+          if(d<128){
+            var t=1-d/128;
+            ctx.strokeStyle='rgba(58,45,219,'+(t*.34)+')';
+            ctx.lineWidth=t*.9;
+            ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+          }
+        }
+      }
+      for(var k=0;k<nodes.length;k++){
+        var p=nodes[k];
+        ctx.fillStyle=k%4===0?'rgba(15,185,166,.9)':'rgba(58,45,219,.62)';
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+      }
+      if(!reduce)requestAnimationFrame(frame);
+    }
+    resize();frame();
+    var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){resize();if(reduce)frame();},180);});
+  }
 })();
 </script>
 </body>
