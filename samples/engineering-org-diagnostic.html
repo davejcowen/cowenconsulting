@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering Org Diagnostic — Meridian Building Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F4F6;--surface:#fff;--ink:#15171D;--ink-soft:#3A3E48;--muted:#646A77;--line:rgba(21,23,29,.10);--line-soft:rgba(21,23,29,.06);--accent:#3A2DDB;--accent-ink:#2A1FA8;--accent-soft:#EEEBFD;--signal:#0A7567;--signal-soft:#E3F7F3;--high:#B42318;--high-bg:#FBE3E0;--med:#B54708;--med-bg:#FEF0C7;--disp:'Bricolage Grotesque',system-ui,sans-serif;--sans:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:1080px;margin:0 auto;padding:0 26px}
+.bar{display:inline-flex;gap:3px;vertical-align:middle}
+.bar i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.bar .f{background:var(--accent)}.bar .h{background:linear-gradient(90deg,var(--accent) 50%,var(--accent-soft) 50%)}.bar .e{background:var(--accent-soft)}
+.chip{font-family:var(--mono);font-size:.66rem;font-weight:500;padding:3px 9px;border-radius:20px;letter-spacing:.03em;white-space:nowrap}
+.p-high,.chip.p-high{color:var(--high)}.chip.p-high{background:var(--high-bg)}
+.p-med,.chip.p-med{color:var(--med)}.chip.p-med{background:var(--med-bg)}
+.p-low,.chip.p-low{color:var(--signal)}.chip.p-low{background:var(--signal-soft)}
+/* hero */
+.hero{background:var(--ink);color:#fff;padding:64px 0 56px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:42px 42px;-webkit-mask-image:radial-gradient(ellipse 70% 80% at 85% 10%,#000,transparent 70%);mask-image:radial-gradient(ellipse 70% 80% at 85% 10%,#000,transparent 70%)}
+.hero .page{position:relative;z-index:1}
+.brand{font-family:var(--mono);font-size:.8rem;letter-spacing:.12em;color:#b9b2f5;text-transform:uppercase;display:flex;align-items:center;gap:9px;margin-bottom:30px}
+.brand .dot{width:8px;height:8px;border-radius:50%;background:var(--signal)}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:#8f86e8;margin-bottom:14px}
+.hero h1{font-family:var(--disp);font-weight:600;font-size:clamp(2rem,4.6vw,3.1rem);line-height:1.05;letter-spacing:-.03em;max-width:18ch}
+.hero .prep{margin-top:18px;font-size:1.05rem;color:rgba(255,255,255,.8)}
+.hero .prep b{color:#fff}
+.meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 40px;margin-top:30px;max-width:760px}
+.mrow{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-top:1px solid rgba(255,255,255,.12);font-size:.86rem}
+.mrow span{color:#9aa0ad}.mrow b{color:#fff;font-weight:500;text-align:right}
+/* sections */
+section{padding:52px 0;border-bottom:1px solid var(--line-soft)}
+.tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:10px}
+h2.sec{font-family:var(--disp);font-weight:600;font-size:1.7rem;letter-spacing:-.02em;margin-bottom:8px}
+.sec-intro{color:var(--ink-soft);max-width:70ch;margin-bottom:26px}
+.lead{font-size:1.18rem;line-height:1.5;color:var(--ink-soft);max-width:62ch;margin-bottom:8px}
+.lead b{color:var(--ink)}
+h3.mini{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:24px 0 10px}
+ul.clean{list-style:none;display:grid;gap:7px}
+ul.clean li{padding-left:20px;position:relative;color:var(--ink-soft);font-size:.97rem}
+ul.clean li::before{content:'▪';position:absolute;left:2px;color:var(--accent)}
+ul.clean li b{color:var(--ink)}
+.risks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:8px 0 4px}
+.risk{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--high);border-radius:12px;padding:18px}
+.risk .rk-m{font-family:var(--disp);font-weight:600;font-size:1.5rem;color:var(--high)}
+.risk h4{font-family:var(--disp);font-size:1.05rem;margin:6px 0 6px}
+.risk p{font-size:.9rem;color:var(--muted);line-height:1.5}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.tile{background:var(--accent-soft);border-radius:12px;padding:18px;text-align:center}
+.tile .tn{font-family:var(--disp);font-weight:600;font-size:1.5rem;color:var(--accent-ink);letter-spacing:-.01em}
+.tile .tl{font-size:.8rem;color:var(--muted);margin-top:4px}
+/* scorecard */
+table.score{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+table.score th{background:var(--ink);color:#fff;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;font-weight:500;text-align:left;padding:11px 14px}
+table.score td{padding:10px 14px;border-top:1px solid var(--line-soft);font-size:.92rem}
+table.score td.dn{color:var(--ink)} table.score .num{font-weight:600;text-align:center} table.score .tgt{color:var(--muted);text-align:center}
+table.score .gap{text-align:center;font-weight:600} table.score td:nth-child(4),table.score td:nth-child(6){text-align:center}
+table.score tr.ov td{background:var(--bg);font-weight:600;border-top:2px solid var(--line)}
+table.score tr.ov .num{color:var(--accent-ink)}
+.legend{margin-top:10px;font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+/* domains */
+.domain{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:0 24px 22px;margin-bottom:18px;overflow:hidden}
+.dhead{display:flex;align-items:center;gap:14px;margin:0 -24px 14px;padding:14px 24px;background:var(--ink);color:#fff;flex-wrap:wrap}
+.dhead .dnum{font-family:var(--mono);font-size:.8rem;color:#8f86e8}
+.dhead h3{font-family:var(--disp);font-weight:600;font-size:1.2rem;flex:1}
+.dhead .dscore{font-family:var(--mono);font-size:.82rem;color:#b9b2f5}
+.situation{color:var(--ink-soft);font-size:.97rem;margin-bottom:14px}
+table.dimtbl{width:100%;border-collapse:collapse;margin-bottom:14px}
+table.dimtbl th{font-family:var(--mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:5px 10px;background:var(--bg)}
+table.dimtbl td{padding:6px 10px;border-top:1px solid var(--line-soft);font-size:.88rem;color:var(--ink-soft)}
+table.dimtbl .num{font-weight:600;color:var(--ink);text-align:center} table.dimtbl .tgt{color:var(--muted);text-align:center}
+table.dimtbl td:nth-child(4){text-align:center}
+.findings{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:6px}
+.fcol h5{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+.fcol.str h5{color:var(--signal)} .fcol.gap h5{color:var(--high)} .recs h5{color:var(--accent-ink);font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;margin:10px 0 7px}
+.fcol ul,.recs ul{list-style:none;display:grid;gap:6px}
+.fcol li,.recs li{padding-left:18px;position:relative;font-size:.9rem;color:var(--ink-soft);line-height:1.5}
+.fcol li::before,.recs li::before{content:'▪';position:absolute;left:2px;color:var(--accent)}
+.recs li b{color:var(--ink);font-family:var(--mono);font-size:.78rem}
+.impact{margin-top:10px;font-size:.9rem;color:var(--ink-soft);padding-top:10px;border-top:1px solid var(--line-soft)}
+.impact b{color:var(--ink)}
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.phase{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;border-top:4px solid var(--muted)}
+.phase.now{border-top-color:var(--high)}.phase.next{border-top-color:var(--med)}.phase.later{border-top-color:var(--signal)}
+.ph-h{font-family:var(--disp);font-weight:600;font-size:1.05rem}
+.phase.now .ph-h{color:var(--high)}.phase.next .ph-h{color:var(--med)}.phase.later .ph-h{color:var(--signal)}
+.ph-s{font-size:.84rem;color:var(--muted);margin:4px 0 12px;font-style:italic}
+.phase ul{list-style:none;display:grid;gap:8px}
+.phase li{padding-left:18px;position:relative;font-size:.9rem;color:var(--ink-soft);line-height:1.5}
+.phase li::before{content:'▪';position:absolute;left:2px;color:var(--accent)}
+.delivery{margin-top:22px;background:var(--ink);color:rgba(255,255,255,.86);border-radius:14px;padding:24px 26px}
+.delivery .tag{color:#8f86e8} .delivery p{font-size:.98rem;line-height:1.55}
+footer{padding:34px 0 50px;color:var(--muted);font-size:.82rem}
+footer .disc{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:18px}
+footer .disc b{color:var(--ink)}
+@media(max-width:860px){.risks,.tiles,.road,.findings,.meta{grid-template-columns:1fr}.tiles{grid-template-columns:repeat(2,1fr)}table.score td:nth-child(3),table.score th:nth-child(3){display:none}}
+@media print{.hero::before{display:none}section{padding:26px 0;break-inside:avoid}.domain,.risk,.phase{break-inside:avoid}body{background:#fff}}
+</style></head><body>
+
+<header class="hero"><div class="page">
+  <div class="brand"><span class="dot"></span>Cowen Leadership Consulting</div>
+  <div class="eyebrow">Engineering Org Diagnostic</div>
+  <h1>Engineering Organization Assessment &amp; Improvement Plan</h1>
+  <p class="prep">Prepared for <b>Meridian Building Systems</b></p>
+  <div class="meta"><div class="mrow"><span>Engagement</span><b>3-week engineering diagnostic · 11 domains</b></div><div class="mrow"><span>Basis</span><b>42 interviews · systems &amp; metrics review · artifact audit</b></div><div class="mrow"><span>Prepared by</span><b>David J. Cowen — Principal, Cowen Leadership Consulting</b></div><div class="mrow"><span>Status</span><b>Illustrative sample — fictional client &amp; data</b></div></div>
+</div></header>
+
+<main class="page">
+
+<section>
+  <div class="tag">Executive Summary</div>
+  <p class="lead"><b>Meridian has a strong product and deep domain expertise — but it runs on heroics. Overall engineering maturity is 2.5 of 5.</b> The organization can ship, but it cannot yet reliably promise. Three systemic gaps — delivery predictability, quality &amp; release discipline, and security &amp; compliance readiness — put the $150M growth plan at direct risk. None require heroic spend; all require system, not effort.</p>
+  <h3 class="mini">What's working</h3><ul class="clean"><li>Genuine domain depth and a credible product position in building automation, energy, and IoT.</li><li>Engaged, capable engineers and above-average culture and retention — the hardest things to build.</li><li>Leadership that asked for an independent read — the appetite to fix this is already here.</li></ul>
+  <h3 class="mini">The three systemic risks</h3>
+  <div class="risks"><div class="risk"><div class="rk-m">2.0–2.2</div><h4>Delivery is not predictable</h4><p>On-time delivery ~60%. Commitments to the board and customers cannot be trusted at scale.</p></div><div class="risk"><div class="rk-m">2.4–2.7</div><h4>Quality &amp; release run on heroics</h4><p>Manual, stressful releases and untested critical paths put escaped defects on enterprise accounts.</p></div><div class="risk"><div class="rk-m">2.1</div><h4>Not enterprise/gov ready</h4><p>No SOC2 and reactive security directly block the upmarket revenue the growth plan depends on.</p></div></div>
+  <h3 class="mini">Top recommendations (cross-domain)</h3><ul class="clean"><li><b>Make delivery predictable.</b> Install requirements-gating and a capacity-aware delivery cadence (Domains 02, 07). This single lever is how on-time delivery moves from ~60% toward 90%.</li><li><b>Shift quality left, automate release.</b> Make critical-path tests a merge gate and build one automated pipeline (03, 06) to cut escaped defects and de-risk every release.</li><li><b>Get enterprise/gov ready.</b> Stand up a security program to land SOC2 Type II in 9–12 months and operate controls continuously (09).</li><li><b>Manage R&amp;D as a portfolio.</b> Classify spend run/grow/transform, defend a strategic mix, and make engineering P&amp;L-aware (11, 04).</li><li><b>De-risk the org.</b> Map and reduce key-person risk and build the second line of leadership (08).</li></ul>
+  <h3 class="mini">Expected impact (3–4 quarters)</h3>
+  <div class="tiles"><div class="tile"><div class="tn">60% → 90%</div><div class="tl">On-time delivery</div></div><div class="tile"><div class="tn">−50%</div><div class="tl">Escaped Sev-1 defects</div></div><div class="tile"><div class="tn">SOC2 Type II</div><div class="tl">Enterprise/gov unlocked</div></div><div class="tile"><div class="tn">~15%</div><div class="tl">R&amp;D re-tilted to growth</div></div></div>
+</section>
+
+<section>
+  <div class="tag">Maturity Scorecard</div>
+  <h2 class="sec">Eleven domains, one scale</h2>
+  <p class="sec-intro">Gap = target − current; priority follows the gap. Overall maturity of 2.5 reflects competent execution without the systems that make it repeatable.</p>
+  <table class="score"><thead><tr><th>#  Domain</th><th>Current</th><th>Target</th><th>Maturity</th><th>Gap</th><th>Priority</th></tr></thead>
+    <tbody><tr>
+      <td class="dn"><b>01</b>&nbsp; Software Engineering</td>
+      <td class="num">2.8</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-low">+0.7</td>
+      <td><span class="chip p-low">Maintain</span></td></tr><tr>
+      <td class="dn"><b>02</b>&nbsp; Engineering Process / SDLC</td>
+      <td class="num">2.2</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-high">+1.3</td>
+      <td><span class="chip p-high">High</span></td></tr><tr>
+      <td class="dn"><b>03</b>&nbsp; Quality &amp; Test</td>
+      <td class="num">2.4</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-med">+1.1</td>
+      <td><span class="chip p-med">Medium</span></td></tr><tr>
+      <td class="dn"><b>04</b>&nbsp; Product Management</td>
+      <td class="num">2.6</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-med">+0.9</td>
+      <td><span class="chip p-med">Medium</span></td></tr><tr>
+      <td class="dn"><b>05</b>&nbsp; Technical Support / CS</td>
+      <td class="num">3.0</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-low">+0.5</td>
+      <td><span class="chip p-low">Maintain</span></td></tr><tr>
+      <td class="dn"><b>06</b>&nbsp; DevOps / Infrastructure</td>
+      <td class="num">2.7</td><td class="tgt">4.0</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-high">+1.3</td>
+      <td><span class="chip p-high">High</span></td></tr><tr>
+      <td class="dn"><b>07</b>&nbsp; Program / Project Management (PMO)</td>
+      <td class="num">2.0</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-high">+1.5</td>
+      <td><span class="chip p-high">High</span></td></tr><tr>
+      <td class="dn"><b>08</b>&nbsp; Engineering Org &amp; Talent</td>
+      <td class="num">2.9</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-low">+0.6</td>
+      <td><span class="chip p-low">Maintain</span></td></tr><tr>
+      <td class="dn"><b>09</b>&nbsp; Security &amp; Compliance</td>
+      <td class="num">2.1</td><td class="tgt">4.0</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-high">+1.9</td>
+      <td><span class="chip p-high">High</span></td></tr><tr>
+      <td class="dn"><b>10</b>&nbsp; Architecture / Data</td>
+      <td class="num">2.5</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-med">+1.0</td>
+      <td><span class="chip p-med">Medium</span></td></tr><tr>
+      <td class="dn"><b>11</b>&nbsp; R&amp;D Portfolio &amp; Strategy</td>
+      <td class="num">2.3</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-med">+1.2</td>
+      <td><span class="chip p-med">Medium</span></td></tr><tr class="ov">
+  <td class="dn"><b>OVERALL</b></td><td class="num">2.5</td><td class="tgt">3.6</td>
+  <td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td><td class="gap">+1.1</td><td>—</td></tr></tbody></table>
+  <div class="legend">● full level &nbsp; ◐ half &nbsp; ○ to target &nbsp;&nbsp;·&nbsp;&nbsp; Priority: High ≥1.3 gap · Medium 0.8–1.2 · Maintain &lt;0.8</div>
+</section>
+
+<section>
+  <div class="tag">Domain Findings &amp; Recommendations</div>
+  <h2 class="sec">Where the work is</h2>
+  <p class="sec-intro">Each domain shows its dimension scores, what is working, the gaps and the risk it tends to hide, the recommended moves, and the outcome those moves are expected to produce.</p>
+  <article class="domain">
+      <div class="dhead"><span class="dnum">01</span><h3>Software Engineering</h3>
+        <span class="dscore">2.8 → 3.5</span><span class="chip p-low">Maintain</span></div>
+      <p class="situation">Strong individual engineers and a healthy core product, but delivery health is invisible — no one watches flow, so quality and speed depend on individual diligence rather than the system.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Code health &amp; quality</td><td class="num">3.0</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Delivery flow</td><td class="num">2.3</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Engineering practices</td><td class="num">3.0</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Technical craftsmanship &amp; standards</td><td class="num">2.8</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Developer experience &amp; tooling</td><td class="num">2.9</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Capable senior engineers with deep building-automation domain knowledge.</li><li>Code review is the norm on the flagship product; main branch is generally releasable.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>No flow metrics: lead time and cycle time are unmeasured, so erosion goes unseen.</li><li>Hidden risk — invisible cycle-time erosion: deploy frequency looks healthy while real idea-to-customer lead time bleeds out in review queues and a growing “don’t-touch-it” legacy core.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R01.1</b> Instrument DORA flow metrics (lead time, cycle time, deploy freq, change-fail) and review weekly.</li><li><b>R01.2</b> Define and enforce a lightweight engineering standard (review SLA, branch policy, definition of done).</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Cycle time visible and trending down; review wait &lt;1 day.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">02</span><h3>Engineering Process / SDLC</h3>
+        <span class="dscore">2.2 → 3.5</span><span class="chip p-high">High</span></div>
+      <p class="situation">Work enters engineering through many doors and changes mid-flight. The average delivery rate looks tolerable, but it masks a long tail of missed commitments — the single biggest threat to the growth plan.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Requirements &amp; intake gating</td><td class="num">1.8</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Planning &amp; estimation</td><td class="num">2.2</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Workflow &amp; WIP management</td><td class="num">2.3</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Release management</td><td class="num">2.4</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Process governance &amp; improvement</td><td class="num">2.3</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Teams run a recognizable sprint cadence with a shared tool of record.</li><li>A genuine appetite from EMs to tighten how work is intake-gated.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>No real Definition of Ready; unvetted scope is absorbed mid-sprint and never shows on the board.</li><li>Hidden risk — scope creep at the intake gate: the org looks busy and on-track right up until it blows a committed date. On-time delivery is ~60%.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R02.1</b> Install requirements-gating: a Definition of Ready and a single intake path before commitment.</li><li><b>R02.2</b> Stand up a predictable delivery cadence with capacity-aware planning and a visible commitment line.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>On-time delivery 60% → 90% within three quarters.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">03</span><h3>Quality &amp; Test</h3>
+        <span class="dscore">2.4 → 3.5</span><span class="chip p-med">Medium</span></div>
+      <p class="situation">Coverage numbers look reassuring, but the critical paths ride on manual checks. Release is a stressful, manual event and escaped defects land on enterprise customers.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Test strategy &amp; coverage</td><td class="num">2.6</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Test automation</td><td class="num">2.1</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Defect management &amp; economics</td><td class="num">2.3</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Environments &amp; test data</td><td class="num">2.5</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Quality culture &amp; shift-left</td><td class="num">2.5</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>A QA team that knows the product and catches real issues.</li><li>Some unit-test automation exists on newer services.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — green coverage masking untested critical paths: aggregate coverage is high on trivial code while revenue and auth flows are barely tested automatically.</li><li>No automated regression gate; releases depend on manual sign-off and weekend heroics.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R03.1</b> Shift-left: make automated tests on changed critical paths a merge gate; track escaped-defect rate.</li><li><b>R03.2</b> Build a regression/perf automation suite (target 70%+ on critical flows) feeding the release pipeline.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Escaped Sev-1 defects −50%; release becomes a non-event.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">04</span><h3>Product Management</h3>
+        <span class="dscore">2.6 → 3.5</span><span class="chip p-med">Medium</span></div>
+      <p class="situation">Product has strong domain instincts but operates as a feature factory — output is high and busy, while few releases are tied to a measured customer outcome.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Customer discovery &amp; insight</td><td class="num">2.4</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Roadmap &amp; prioritization</td><td class="num">2.5</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Outcome orientation</td><td class="num">2.3</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Product–engineering collaboration</td><td class="num">3.0</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Lifecycle &amp; portfolio management</td><td class="num">2.8</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Deep domain credibility with customers and a clear category position.</li><li>A roadmap exists and is communicated to the company.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — feature factory: steady shipping masks stalling activation, retention, and expansion.</li><li>Discovery is ad hoc; prioritization is loudest-voice rather than evidence- or value-based.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R04.1</b> Adopt outcome-based roadmapping: every initiative carries a target metric and is reviewed against it.</li><li><b>R04.2</b> Introduce lightweight, continuous discovery and a transparent prioritization model (e.g. value vs effort).</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Roadmap tied to outcomes; clearer bets, less waste.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">05</span><h3>Technical Support / CS</h3>
+        <span class="dscore">3.0 → 3.5</span><span class="chip p-low">Maintain</span></div>
+      <p class="situation">Support is competent and customers are generally well-served, but the same issues recur because the voice-of-customer loop back into the product is broken.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Support operations &amp; SLAs</td><td class="num">3.4</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Escalation &amp; engineering handoff</td><td class="num">2.9</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Knowledge management &amp; self-service</td><td class="num">2.5</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Voice-of-customer loop</td><td class="num">2.6</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Proactive support &amp; telemetry</td><td class="num">2.8</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Strong SLAs met for enterprise accounts; knowledgeable support engineers.</li><li>Healthy CSAT and reasonable first-response times.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — broken voice-of-customer loop: “passed to product” is a brush-off, not a trace to the backlog, so the same pain is absorbed quarter after quarter as permanent operating cost.</li><li>Limited self-service / knowledge base, so deflection is low and volume scales with customers.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R05.1</b> Close the loop: a standing support→product triage with recurring-issue themes feeding the roadmap.</li><li><b>R05.2</b> Invest in self-service (KB + in-product help) and track deflection as a first-class metric.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Recurring ticket themes engineered away; volume decoupled from growth.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">06</span><h3>DevOps / Infrastructure</h3>
+        <span class="dscore">2.7 → 4.0</span><span class="chip p-high">High</span></div>
+      <p class="situation">A mix of on-prem and cloud with partial automation. Dashboards look healthy, but resilience is unproven and cloud cost is unmanaged — both material as the company scales.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>CI/CD pipeline maturity</td><td class="num">2.6</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Cloud &amp; infrastructure-as-code</td><td class="num">2.7</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Reliability &amp; observability</td><td class="num">2.8</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Incident management</td><td class="num">2.9</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Cost management (FinOps)</td><td class="num">2.0</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Cloud footprint on a modern provider; some infrastructure-as-code in newer stacks.</li><li>Basic monitoring and alerting are in place.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — untested disaster recovery: no one has rebuilt production from code or restored from backup; the environment is an unreproducible snowflake until an outage proves it.</li><li>No FinOps discipline — cloud spend grows with no owner; CI/CD is partial and inconsistent across teams.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R06.1</b> Make the pipeline uniform: one automated CI/CD path; codify infra and run a real DR game-day.</li><li><b>R06.2</b> Stand up cost observability with an accountable owner and per-service budgets.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Proven recoverability; predictable, owned cloud spend.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">07</span><h3>Program / Project Management (PMO)</h3>
+        <span class="dscore">2.0 → 3.5</span><span class="chip p-high">High</span></div>
+      <p class="situation">Cross-team planning is thin and status is narrative, not data. Leadership learns about slips late — the second systemic risk to the growth commitments.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Planning &amp; roadmap predictability</td><td class="num">1.9</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Dependency &amp; risk management</td><td class="num">1.9</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Status transparency &amp; reporting</td><td class="num">2.0</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Resource &amp; capacity management</td><td class="num">2.1</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Governance &amp; methodology fit</td><td class="num">2.2</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Committed EMs who care about delivery and want better tooling.</li><li>Executive demand for predictability — a mandate to build on.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — watermelon status: projects are reported green right up to the deadline because RAG is a hand-assembled judgment call, not driven from dependency, capacity, and schedule-variance data.</li><li>Dependencies and cross-team risks are managed informally and surface late.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R07.1</b> Stand up a lightweight PMO: standard planning, a live dependency/risk register, and data-driven status.</li><li><b>R07.2</b> Report delivery predictability (committed vs delivered) to leadership monthly.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Slips visible weeks earlier; credible executive forecasting.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">08</span><h3>Engineering Org &amp; Talent</h3>
+        <span class="dscore">2.9 → 3.5</span><span class="chip p-low">Maintain</span></div>
+      <p class="situation">Engaged people and a workable structure, but the org carries concentrated key-person risk and an under-built leadership bench as it scales across three sites.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Org structure &amp; team topology</td><td class="num">3.0</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Hiring &amp; onboarding</td><td class="num">2.7</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Retention &amp; engagement</td><td class="num">3.3</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Career growth &amp; performance</td><td class="num">2.6</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Leadership bench &amp; succession</td><td class="num">2.3</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Above-average engagement and a strong engineering culture.</li><li>Distributed teams (Atlanta, Pune, Cluj) already collaborating.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — key-person / succession risk: critical knowledge and relationships sit undocumented in one or two heads (often at a single site); exposure is invisible until they resign.</li><li>Career ladders and onboarding are informal, lengthening ramp and clouding growth paths.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R08.1</b> Map key-person risk and fund deliberate knowledge transfer and a second line of leaders.</li><li><b>R08.2</b> Define career ladders and a standardized onboarding path to shorten ramp.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Reduced single-points-of-failure; faster, clearer ramp.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">09</span><h3>Security &amp; Compliance</h3>
+        <span class="dscore">2.1 → 4.0</span><span class="chip p-high">High</span></div>
+      <p class="situation">Security is reactive and certification readiness is thin — directly blocking the move into enterprise and government accounts the growth plan depends on. The third systemic risk.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Application security (secure SDLC)</td><td class="num">1.9</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Vulnerability &amp; patch management</td><td class="num">2.1</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Identity &amp; access management</td><td class="num">2.2</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Compliance &amp; certifications</td><td class="num">2.0</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Incident response &amp; resilience</td><td class="num">2.1</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Awareness at the leadership level that SOC2 is now table stakes.</li><li>Basic perimeter controls and cloud-provider security features in use.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — paper compliance: policy docs exist but controls are reconstructed in audit fire drills rather than operated continuously (MFA exceptions, standing admin access, untested backups, an unexercised IR plan).</li><li>No secure-SDLC: SAST/DAST and dependency scanning are absent from the pipeline.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R09.1</b> Stand up a security program to land SOC2 Type II in 9–12 months; operate controls continuously.</li><li><b>R09.2</b> Embed secure-SDLC (SAST/DAST, dependency and secrets scanning) and run an IR tabletop.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>SOC2 Type II unlocks ~$8–12M enterprise/gov pipeline.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">10</span><h3>Architecture / Data</h3>
+        <span class="dscore">2.5 → 3.5</span><span class="chip p-med">Medium</span></div>
+      <p class="situation">A capable architecture under growing strain. Technical debt is real but uncatalogued, and the data platform lags the company&#x27;s analytics and AI ambitions.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>System architecture &amp; scalability</td><td class="num">2.7</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Technical debt management</td><td class="num">2.1</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Data platform &amp; analytics</td><td class="num">2.3</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Integration &amp; APIs</td><td class="num">2.7</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Architecture governance &amp; standards</td><td class="num">2.5</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Pragmatic, domain-fit architecture that has scaled with the business so far.</li><li>Early moves toward services and cloud telemetry on newer products.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — invisible technical debt: debt is never catalogued, quantified, or budgeted against, so it is only discovered when a scaling cliff or stale dependency takes down production.</li><li>Data is siloed per product; no unified platform for the energy-analytics and AI roadmap.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R10.1</b> Create a quantified tech-debt register with an explicit, budgeted paydown allocation each quarter.</li><li><b>R10.2</b> Define a target-state architecture and a data-platform strategy aligned to the analytics/AI roadmap.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Debt managed deliberately; data ready for the AI roadmap.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">11</span><h3>R&amp;D Portfolio &amp; Strategy</h3>
+        <span class="dscore">2.3 → 3.5</span><span class="chip p-med">Medium</span></div>
+      <p class="situation">Engineering investment is not managed as a portfolio. Run-the-business and firefighting silently consume the capacity meant for the strategic bets the board is funding.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Investment allocation (run/grow/transform)</td><td class="num">2.0</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>ROI &amp; business alignment</td><td class="num">2.2</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Roadmap-to-strategy linkage</td><td class="num">2.4</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Innovation &amp; IP</td><td class="num">2.7</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Financial discipline (P&amp;L-aware)</td><td class="num">2.1</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>A leadership team that wants engineering tied to business outcomes.</li><li>A genuine innovation seam (energy analytics, IoT/edge, AI) to invest behind.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — starved transform bets: the roadmap looks strategy-aligned in the deck, but capacity is eaten by run and unplanned work, so growth bets are funded on paper and starved in practice.</li><li>No ROI discipline or run/grow/transform visibility; engineering is not P&amp;L-aware.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R11.1</b> Classify all R&amp;D spend run/grow/transform; set and defend a target mix tied to strategy.</li><li><b>R11.2</b> Introduce ROI/business-case gating on major investments and make engineering P&amp;L-aware.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>~15% of R&amp;D re-tilted from run to strategic growth bets.</i></p></div>
+    </article>
+</section>
+
+<section>
+  <div class="tag">Prioritized Roadmap</div>
+  <h2 class="sec">Now · Next · Later</h2>
+  <p class="sec-intro">Sequenced by impact and dependency, not by domain. The first 90 days buy predictability and unblock revenue; later phases compound on that base.</p>
+  <div class="road"><div class="phase now"><div class="ph-h">NOW  ·  0–90 days</div><div class="ph-s">Stop the bleeding — predictability and unblockers</div><ul><li>Install requirements-gating + Definition of Ready (02); stand up data-driven status (07).</li><li>Make critical-path tests a merge gate (03); instrument DORA flow metrics (01).</li><li>Launch the SOC2 program and close the worst control gaps — MFA, admin access, backups (09).</li><li>Map key-person risk across the three sites and start knowledge transfer (08).</li></ul></div><div class="phase next"><div class="ph-h">NEXT  ·  Q2–Q3</div><div class="ph-s">Build the systems — automation and portfolio control</div><ul><li>Unify CI/CD and run a DR game-day; stand up FinOps ownership (06).</li><li>Build the regression/perf automation suite to 70%+ on critical flows (03).</li><li>Classify R&amp;D run/grow/transform and introduce ROI gating (11); outcome-based roadmap (04).</li><li>Quantified tech-debt register with budgeted paydown (10); close the support→product loop (05).</li></ul></div><div class="phase later"><div class="ph-h">LATER  ·  Q4+</div><div class="ph-s">Optimize &amp; compound — measured continuous improvement</div><ul><li>Reach SOC2 Type II and open enterprise/gov pipeline (09).</li><li>Target-state architecture + data platform for the analytics/AI roadmap (10).</li><li>Career ladders, leadership bench, and standardized onboarding at scale (08).</li><li>Move leading domains from Defined to Managed — metrics-driven improvement as routine (all).</li></ul></div></div>
+  <div class="delivery"><div class="tag">Suggested delivery model</div><p>A focused 9-month transformation led by a fractional CTO (1–2 days/week) with two internal workstream owners — one for delivery &amp; quality (02/03/06/07), one for security &amp; compliance (09). Portfolio and org moves (11/08) run at the leadership cadence. This is system-building, not staff augmentation: the goal is an organization that sustains these gains without us.</p></div>
+</section>
+
+<footer>
+  <div class="disc"><b>Sample document.</b> Meridian Building Systems and all figures herein are fictional and illustrative — created to demonstrate the format and depth of a Cowen Leadership Consulting Engineering Org Diagnostic.</div>
+  Cowen Leadership Consulting &nbsp;·&nbsp; Confidential — prepared for Meridian Building Systems &nbsp;·&nbsp; © 2026 David J. Cowen
+</footer>
+</main></body></html>
