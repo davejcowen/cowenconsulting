@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 76" width="300" height="76" role="img" aria-label="DTech Leadership — engineering growth">
+  <defs><clipPath id="lg"><rect x="6" y="14" width="48" height="48" rx="13"/></clipPath></defs>
+  <rect x="6" y="14" width="48" height="48" rx="13" fill="#1F6BFF"/>
+  <g clip-path="url(#lg)" stroke="#ffffff" stroke-opacity="0.16" stroke-width="0.8">
+    <line x1="15" y1="14" x2="15" y2="62"/><line x1="23" y1="14" x2="23" y2="62"/><line x1="31" y1="14" x2="31" y2="62"/><line x1="39" y1="14" x2="39" y2="62"/><line x1="47" y1="14" x2="47" y2="62"/>
+    <line x1="6" y1="22" x2="54" y2="22"/><line x1="6" y1="30" x2="54" y2="30"/><line x1="6" y1="38" x2="54" y2="38"/><line x1="6" y1="46" x2="54" y2="46"/><line x1="6" y1="54" x2="54" y2="54"/>
+  </g>
+  <path d="M18 44 L31 37 L44 44" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M18 37 L31 30 L44 37" fill="none" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M19 30 L31 23.5 L43 30" fill="none" stroke="#0FB9A6" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="68" y="38" font-family="'Bricolage Grotesque',system-ui,sans-serif" font-size="27"><tspan font-weight="700" fill="#15171D">DTech</tspan><tspan font-weight="500" fill="#646A77"> Leadership</tspan></text>
+  <text x="69" y="56" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10.5" letter-spacing="1.5" fill="#1F6BFF">ENGINEERING GROWTH</text>
+</svg>

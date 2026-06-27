@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="theme-color" content="#1F6BFF">
 <style>
 :root{
   --bg:#F3F4F6;
@@ -17,9 +19,9 @@
   --muted:#646A77;
   --line:rgba(21,23,29,.10);
   --line-soft:rgba(21,23,29,.06);
-  --accent:#3A2DDB;
-  --accent-soft:#EEEBFD;
-  --accent-ink:#2A1FA8;
+  --accent:#1F6BFF;
+  --accent-soft:#E5EEFF;
+  --accent-ink:#0F4FD6;
   --signal:#0FB9A6;
   --signal-ink:#0A7567;
   --signal-soft:#E3F7F3;
@@ -40,6 +42,7 @@ header.nav{position:sticky;top:0;z-index:50;background:rgba(243,244,246,.82);bac
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
 .brand{font-family:var(--display);font-weight:700;font-size:1.22rem;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
 .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block}
+.brand-mark{flex-shrink:0;display:block}
 .nav-links{display:flex;align-items:center;gap:28px}
 .nav-links a{font-size:.92rem;color:var(--ink-soft);transition:color .15s}
 .nav-links a:hover{color:var(--ink)}
@@ -52,7 +55,7 @@ header.nav{position:sticky;top:0;z-index:50;background:rgba(243,244,246,.82);bac
 .hero-inner{position:relative;z-index:1;max-width:900px}
 .eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-ink);display:inline-flex;align-items:center;gap:9px;margin-bottom:26px}
 .eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(58,45,219,.45)}70%{box-shadow:0 0 0 8px rgba(58,45,219,0)}100%{box-shadow:0 0 0 0 rgba(58,45,219,0)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,107,255,.45)}70%{box-shadow:0 0 0 8px rgba(31,107,255,0)}100%{box-shadow:0 0 0 0 rgba(31,107,255,0)}}
 h1.hero-title{font-family:var(--display);font-weight:600;font-size:clamp(2.5rem,6.2vw,4.4rem);line-height:1.04;letter-spacing:-.035em;margin-bottom:24px}
 h1.hero-title .em{color:var(--accent)}
 .hero-sub{font-size:clamp(1.05rem,2vw,1.26rem);color:var(--ink-soft);max-width:62ch;margin-bottom:18px;line-height:1.6}
@@ -61,8 +64,8 @@ h1.hero-title .em{color:var(--accent)}
 .term .cursor{display:inline-block;width:8px;height:1.05em;background:var(--accent);margin-left:1px;animation:blink 1.05s steps(1) infinite;vertical-align:text-bottom}
 @keyframes blink{50%{opacity:0}}
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-.btn-primary{font-weight:500;font-size:1rem;background:var(--accent);color:#fff;padding:14px 26px;border-radius:11px;transition:transform .12s,box-shadow .2s;box-shadow:0 1px 2px rgba(42,31,168,.25)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(58,45,219,.5)}
+.btn-primary{font-weight:500;font-size:1rem;background:var(--accent);color:#fff;padding:14px 26px;border-radius:11px;transition:transform .12s,box-shadow .2s;box-shadow:0 1px 2px rgba(15,79,214,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(31,107,255,.5)}
 .btn-ghost{font-weight:500;font-size:1rem;color:var(--ink);padding:14px 22px;border-radius:11px;border:1px solid var(--line);transition:border-color .15s,background .15s}
 .btn-ghost:hover{border-color:var(--ink);background:var(--surface)}
 
@@ -86,7 +89,7 @@ section.block{padding:90px 0}
 
 .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .svc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;transition:transform .18s,border-color .18s,box-shadow .18s}
-.svc:hover{transform:translateY(-3px);border-color:rgba(58,45,219,.35);box-shadow:0 18px 40px -22px rgba(21,23,29,.3)}
+.svc:hover{transform:translateY(-3px);border-color:rgba(31,107,255,.35);box-shadow:0 18px 40px -22px rgba(21,23,29,.3)}
 .svc .num{font-family:var(--mono);font-size:.78rem;color:var(--accent);margin-bottom:18px}
 .svc h3{font-family:var(--display);font-weight:600;font-size:1.32rem;letter-spacing:-.01em;margin-bottom:9px}
 .svc .tease{font-weight:500;color:var(--accent-ink);font-size:.98rem;margin-bottom:11px}
@@ -253,7 +256,7 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <a href="#top" class="brand"><span class="dot"></span>DTech&nbsp;<span style="font-weight:500;color:var(--muted)">Leadership</span></a>
+    <a href="#top" class="brand"><svg class="brand-mark" width="28" height="28" viewBox="0 0 48 48" aria-hidden="true"><defs><clipPath id="bm"><rect x="2" y="2" width="44" height="44" rx="12"/></clipPath></defs><rect x="2" y="2" width="44" height="44" rx="12" fill="var(--accent)"/><g clip-path="url(#bm)" stroke="#fff" stroke-opacity="0.18" stroke-width="0.9"><line x1="11" y1="2" x2="11" y2="46"/><line x1="18" y1="2" x2="18" y2="46"/><line x1="25" y1="2" x2="25" y2="46"/><line x1="32" y1="2" x2="32" y2="46"/><line x1="39" y1="2" x2="39" y2="46"/><line x1="2" y1="11" x2="46" y2="11"/><line x1="2" y1="18" x2="46" y2="18"/><line x1="2" y1="25" x2="46" y2="25"/><line x1="2" y1="32" x2="46" y2="32"/><line x1="2" y1="39" x2="46" y2="39"/></g><path d="M13 33 L24 26 L35 33" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 27 L24 20 L35 27" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 21 L24 14.5 L34 21" fill="none" stroke="#0FB9A6" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>DTech&nbsp;<span style="font-weight:500;color:var(--muted)">Leadership</span></a>
     <nav class="nav-links" id="navlinks">
       <a href="#expertise">What we do</a>
       <a href="#bench">Team</a>
@@ -333,7 +336,7 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
         <div class="num">04</div>
         <h3>Process &amp; delivery transformation</h3>
         <div class="tease">Make delivery predictable — turn heroics into a system.</div>
-        <p>We install the requirements-gating, planning cadence, and SDLC discipline that move on-time delivery from broken to dependable — one engagement took it from below 60% to above 96%, sustained for three years. Our <a href="samples/engineering-org-diagnostic.html" target="_blank" rel="noopener" style="color:var(--accent-ink);font-weight:500;text-decoration:underline;text-decoration-color:rgba(58,45,219,.35);text-underline-offset:2px">Engineering Org Diagnostic</a> scores 11 domains so the plan targets what actually matters.</p>
+        <p>We install the requirements-gating, planning cadence, and SDLC discipline that move on-time delivery from broken to dependable — one engagement took it from below 60% to above 96%, sustained for three years. Our <a href="samples/engineering-org-diagnostic.html" target="_blank" rel="noopener" style="color:var(--accent-ink);font-weight:500;text-decoration:underline;text-decoration-color:rgba(31,107,255,.35);text-underline-offset:2px">Engineering Org Diagnostic</a> scores 11 domains so the plan targets what actually matters.</p>
       </div>
       <div class="svc reveal">
         <div class="num">05</div>
@@ -680,7 +683,7 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
           var b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
           if(d<128){
             var t=1-d/128;
-            ctx.strokeStyle='rgba(58,45,219,'+(t*.34)+')';
+            ctx.strokeStyle='rgba(31,107,255,'+(t*.34)+')';
             ctx.lineWidth=t*.9;
             ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
           }
@@ -688,7 +691,7 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
       }
       for(var k=0;k<nodes.length;k++){
         var p=nodes[k];
-        ctx.fillStyle=k%4===0?'rgba(15,185,166,.9)':'rgba(58,45,219,.62)';
+        ctx.fillStyle=k%4===0?'rgba(15,185,166,.9)':'rgba(31,107,255,.62)';
         ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
       }
       if(!reduce)requestAnimationFrame(frame);
