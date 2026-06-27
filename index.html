@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DTech Leadership Consulting — Digital transformation, M&A integration & technology modernization</title>
-<meta name="description" content="DTech Leadership Consulting is a specialist firm of senior engineering operators who lead the hard transitions: digital transformation, M&A due diligence and divestitures, post-merger integration of engineering and support teams, process transformation, and technology modernization. Founded by Dave Cowen, a CTO with 25 years and a $1.1B+ portfolio.">
+<title>DTech Leadership Consulting — Engineering growth, from startup to enterprise</title>
+<meta name="description" content="DTech Leadership Consulting is a team of senior engineering operators and domain experts — engineering, product, hardware, mechanical, manufacturing, QA, and PMO — who help companies engineer growth from a startup's first foundation to enterprise scale: digital transformation, M&A and divestitures, process transformation, and technology modernization. Founded by Dave Cowen, a CTO with 25 years and a $1.1B+ portfolio.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -189,6 +189,28 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
 .tl-foot p{font-size:1.02rem;line-height:1.55;color:rgba(255,255,255,.86);flex:1;min-width:280px}
 .tl-foot b{color:#fff;font-weight:500}
 
+/* Growth stages */
+.stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px 26px;transition:transform .18s,box-shadow .18s}
+.stage:hover{transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(21,23,29,.3)}
+.stage .st-k{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:14px;display:flex;align-items:center;gap:9px}
+.stage .st-k::before{content:'';width:16px;height:16px;border-radius:50%;background:var(--accent-soft);border:2px solid var(--accent);flex-shrink:0}
+.stage:nth-child(2) .st-k::before{background:var(--accent)}
+.stage:nth-child(3) .st-k::before{background:var(--ink);border-color:var(--ink)}
+.stage:nth-child(3) .st-k{color:var(--ink)}
+.stage h3{font-family:var(--display);font-weight:600;font-size:1.26rem;letter-spacing:-.01em;margin-bottom:9px}
+.stage p{color:var(--muted);font-size:.95rem;line-height:1.6}
+.stage .st-for{margin-top:14px;padding-top:13px;border-top:1px solid var(--line-soft);font-size:.82rem;color:var(--ink-soft)}
+.stage .st-for b{color:var(--ink);font-weight:600}
+
+/* The bench */
+.bench-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.disc{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:17px 18px;transition:border-color .18s,transform .18s}
+.disc:hover{border-color:rgba(15,185,166,.4);transform:translateY(-2px)}
+.disc h4{font-family:var(--display);font-weight:600;font-size:1.02rem;letter-spacing:-.01em;margin-bottom:5px;display:flex;align-items:center;gap:8px}
+.disc h4::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--signal);flex-shrink:0}
+.disc p{color:var(--muted);font-size:.86rem;line-height:1.5}
+
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
 
@@ -200,6 +222,8 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
   .proof-item:nth-child(2){border-right:none}
   .proof-item:nth-child(1),.proof-item:nth-child(2){border-bottom:1px solid var(--line-soft)}
   .svc-grid{grid-template-columns:1fr}
+  .stage-grid{grid-template-columns:1fr}
+  .bench-grid{grid-template-columns:1fr}
   .work-grid{grid-template-columns:1fr}
   .proc{padding:44px 26px;border-radius:16px}
   .proc-steps{grid-template-columns:1fr 1fr;gap:24px}
@@ -232,6 +256,7 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
     <a href="#top" class="brand"><span class="dot"></span>DTech&nbsp;<span style="font-weight:500;color:var(--muted)">Leadership</span></a>
     <nav class="nav-links" id="navlinks">
       <a href="#expertise">What we do</a>
+      <a href="#bench">Team</a>
       <a href="#track">Track record</a>
       <a href="#journey">M&amp;A</a>
       <a href="#process">How we work</a>
@@ -247,9 +272,9 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
 <section class="hero">
   <canvas class="ai-net" id="ainet" aria-hidden="true"></canvas>
   <div class="wrap hero-inner">
-    <span class="eyebrow"><span class="pulse"></span>A specialist engineering-leadership firm · transformation · M&amp;A · modernization</span>
-    <h1 class="hero-title">Engineering transformation,<br>built from the <span class="em">keyboard up.</span></h1>
-    <p class="hero-sub">DTech Leadership Consulting is a firm of senior engineering operators who lead the hard transitions — digital transformation, M&amp;A and divestitures, assimilating disparate engineering and support teams, process transformation, and technology modernization. Founded by Dave Cowen — a CTO with 25 years and a $1.1B+ portfolio — we bring the experience to do it at the scale where being wrong is expensive.</p>
+    <span class="eyebrow"><span class="pulse"></span>A team of engineering &amp; product experts · startup → midsize → enterprise</span>
+    <h1 class="hero-title">Engineering growth,<br>built from the <span class="em">keyboard up.</span></h1>
+    <p class="hero-sub">DTech Leadership Consulting is a team of senior operators and domain experts who help companies engineer growth — from a startup laying its first foundation to an enterprise leading its hardest transition. We bring the right specialists for the moment — engineering, product, hardware, mechanical, manufacturing, QA, and PMO — backed by 25 years and a $1.1B+ portfolio. Founded by Dave Cowen.</p>
     <div class="term"><span class="mono" style="color:var(--muted)">available&nbsp;for:</span>&nbsp;<span class="typed" id="typed"></span><span class="cursor"></span></div>
     <div class="hero-cta">
       <a href="#contact" class="btn-primary">Start a conversation</a>
@@ -322,6 +347,57 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
         <div class="tease">Executive engineering leadership, for the season you need it.</div>
         <p>When you need a seasoned hand in the seat — between CTOs, through a transition, or carrying more risk than the bench can cover — we step in as fractional or interim leadership: setting strategy, fixing delivery, and building the team that ships, then handing back something your people can run without us.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="stages" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Built for every stage</span>
+      <h2 class="sec-title">From your first hire to enterprise scale.</h2>
+      <p class="sec-intro">Growth breaks what got you here. We meet you where you are — and lay a foundation that scales the same way we've scaled $1B+ organizations, so you don't have to rip it out at the next stage.</p>
+    </div>
+    <div class="stage-grid">
+      <div class="stage reveal">
+        <div class="st-k">Startup</div>
+        <h3>Lay the foundation</h3>
+        <p>You're moving fast toward product-market fit. We help you make the architecture, hiring, and process calls that compound — right-sized, not enterprise-heavy — so early speed doesn't turn into the rework that stalls you later.</p>
+        <div class="st-for"><b>Best for:</b> first technical foundation, fractional CTO, build-vs-buy, your first 5–30 engineers.</div>
+      </div>
+      <div class="stage reveal">
+        <div class="st-k">Scale-up</div>
+        <h3>Fast-track growth</h3>
+        <p>Growth is breaking what worked at ten people. We install predictable delivery, scale the team and SDLC, and pull in specialists — hardware, mechanical, QA, PMO — exactly when you need them, so you grow without the chaos tax.</p>
+        <div class="st-for"><b>Best for:</b> scaling teams, delivery turnarounds, hardening process, standing up new disciplines.</div>
+      </div>
+      <div class="stage reveal">
+        <div class="st-k">Enterprise</div>
+        <h3>Lead the hard transitions</h3>
+        <p>At scale the stakes are transformation, M&amp;A, and modernization. We bring operators who've led $1B+ organizations through exactly these — and the discipline that makes on-time delivery a habit, not a hope.</p>
+        <div class="st-for"><b>Best for:</b> digital transformation, M&amp;A &amp; divestitures, org integration, modernization at scale.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="bench" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">One team, every discipline</span>
+      <h2 class="sec-title">The right experts, pulled in for the moment.</h2>
+      <p class="sec-intro">We're not a lone consultant. We're a bench of senior specialists across the disciplines a real product takes — and we bring exactly the ones your engagement needs, then leave the rest off your invoice.</p>
+    </div>
+    <div class="bench-grid">
+      <div class="disc reveal"><h4>Engineering leadership</h4><p>Software &amp; firmware architecture, SDLC, and delivery.</p></div>
+      <div class="disc reveal"><h4>Product management</h4><p>Discovery, roadmap, and outcome-driven prioritization.</p></div>
+      <div class="disc reveal"><h4>Hardware design</h4><p>Electrical / board-level design and bring-up.</p></div>
+      <div class="disc reveal"><h4>Mechanical engineering</h4><p>Enclosure, thermal, and design-for-manufacture.</p></div>
+      <div class="disc reveal"><h4>Contract manufacturing</h4><p>CM selection, engagement, and supply-chain readiness.</p></div>
+      <div class="disc reveal"><h4>Quality &amp; test</h4><p>Test strategy, automation, and release quality.</p></div>
+      <div class="disc reveal"><h4>Program management</h4><p>PMO, planning, dependencies, and predictable delivery.</p></div>
+      <div class="disc reveal"><h4>DevOps &amp; infrastructure</h4><p>CI/CD, cloud, reliability, and cost.</p></div>
+      <div class="disc reveal"><h4>Data center &amp; thermal</h4><p>DCIM, building automation, and high-density cooling.</p></div>
     </div>
   </div>
 </section>
@@ -489,36 +565,38 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
     <div class="about-grid">
       <div class="about-body reveal">
         <span class="sec-tag">About the firm</span>
-        <p class="lead">DTech Leadership Consulting is built on a simple idea: the hardest technology transitions should be led by people who have actually run them — not advised on them from the outside.</p>
-        <p>We're a specialist firm of senior engineering operators. We take on the work that decides whether a company's next chapter succeeds — digital transformation, M&amp;A and divestitures, integrating disparate engineering and support teams, process transformation, and technology modernization. Every engagement pairs a seasoned operator with our structured Engineering Org Diagnostic, so the plan is grounded in evidence, not opinion, and your team can run it after we leave.</p>
+        <p class="lead">DTech Leadership Consulting is built on a simple idea: whether you're laying a startup's first foundation or leading an enterprise transition, the work should be led by people who have actually done it — not advised on it from the outside.</p>
+        <p>We're a team of senior engineering operators and specialists — software and firmware, product, hardware, mechanical, manufacturing, QA, and PMO — and we bring exactly the disciplines your engagement needs. We work with companies at every stage: a startup building its foundation, a scale-up outgrowing what worked, or an enterprise navigating transformation, M&amp;A, and modernization. Every engagement pairs the right operators with our structured Engineering Org Diagnostic, so the plan is grounded in evidence, not opinion, and your team can run it after we leave.</p>
         <p>The firm was founded by <b>Dave Cowen</b>, who rose from writing device drivers to CTO over 25 years and today leads global engineering for a $1.1B+ portfolio with a $40M R&amp;D budget. Along the way he delivered a $125M, 360-developer DCIM platform in under 18 months, built an engineering center from zero to 252 people, drove on-time delivery from below 60% to above 96%, and carried an engineering org through five changes of ownership — including a private-equity divestiture — as the leader each new owner asked to stay. He's a named inventor on multiple data center patents, including a pending Direct-to-Chip cooling system for the AI era.</p>
-        <p>We engage where it counts and right-size to the problem — fractional or interim leadership, an advisory cadence, or a defined transformation, diligence, or integration scope — without asking you to commit to a full-time hire.</p>
+        <p>We engage where it counts and right-size to the problem and the stage — fractional or interim leadership, an advisory cadence, or a defined foundation, transformation, diligence, or integration scope — without asking you to commit to a full-time hire.</p>
       </div>
       <aside class="about-side reveal">
-        <h5>What we lead</h5>
+        <h5>What we do</h5>
         <div class="skill-row">
+          <span class="skill">Startup Foundations</span>
+          <span class="skill">Growth Engineering</span>
           <span class="skill">Digital Transformation</span>
           <span class="skill">M&amp;A &amp; Divestitures</span>
           <span class="skill">Post-Merger Integration</span>
-          <span class="skill">Team Assimilation</span>
           <span class="skill">Process Transformation</span>
           <span class="skill">Technology Modernization</span>
           <span class="skill">Fractional / Interim CTO</span>
-          <span class="skill">P&amp;L-Aware Engineering</span>
         </div>
-        <h5 class="mt">Technical fluency</h5>
+        <h5 class="mt">The bench</h5>
         <div class="skill-row">
-          <span class="skill">Cloud / IoT / Edge</span>
-          <span class="skill">Legacy-to-Cloud Migration</span>
-          <span class="skill">Microservices</span>
-          <span class="skill">Agile / DevOps / CI-CD</span>
-          <span class="skill">DCIM &amp; Data Center Infra</span>
-          <span class="skill">SOC2 / CMMC / ISO</span>
+          <span class="skill">Engineering</span>
+          <span class="skill">Product</span>
+          <span class="skill">Hardware</span>
+          <span class="skill">Mechanical</span>
+          <span class="skill">Manufacturing / CM</span>
+          <span class="skill">QA</span>
+          <span class="skill">PMO</span>
+          <span class="skill">DevOps</span>
         </div>
         <div class="metas">
           <div class="meta"><span>Founded by</span><b>Dave Cowen, CTO</b></div>
-          <div class="meta"><span>Based in</span><b>Acworth, GA</b></div>
-          <div class="meta"><span>Engagements</span><b>Transformation · M&amp;A · fractional</b></div>
+          <div class="meta"><span>Stages</span><b>Startup → Enterprise</b></div>
+          <div class="meta"><span>Engagements</span><b>Foundation · growth · transformation</b></div>
           <div class="meta"><span>Method</span><b><a href="samples/engineering-org-diagnostic.html" target="_blank" rel="noopener" style="color:var(--accent-ink)">Engineering Org Diagnostic ↗</a></b></div>
           <div class="meta"><span>Response</span><b>Within 1 business day</b></div>
         </div>
@@ -530,10 +608,10 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
 <section class="final" id="contact">
   <div class="wrap">
     <div class="reveal">
-      <h2>Facing a transition<br>worth getting right?</h2>
-      <p>Whether it's a transformation to lead, a deal to evaluate, teams to assimilate, a delivery turnaround, or a CTO seat to fill for a while — tell us what you're facing.</p>
+      <h2>Building toward your<br>next stage of growth?</h2>
+      <p>Whether you're laying a startup's foundation, scaling through the messy middle, or leading an enterprise transformation, M&amp;A, or modernization — tell us what you're facing.</p>
       <div class="hero-cta">
-        <a href="mailto:dave@kdcowen.com" class="btn-primary">Email Dave</a>
+        <a href="mailto:dave@dtechleadership.com" class="btn-primary">Email Dave</a>
         <a href="https://www.linkedin.com/in/davidjcowen" class="btn-ghost">Connect on LinkedIn</a>
       </div>
     </div>
@@ -546,11 +624,11 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
   <div class="wrap foot-inner">
     <div>
       <div class="fbrand">DTech Leadership Consulting</div>
-      <div class="fmeta">Digital transformation, M&amp;A integration, and technology modernization.</div>
+      <div class="fmeta">Engineering growth — from startup foundation to enterprise scale.</div>
     </div>
     <div class="foot-links">
       <a href="https://www.linkedin.com/in/davidjcowen">LinkedIn</a>
-      <a href="mailto:dave@kdcowen.com">Email</a>
+      <a href="mailto:dave@dtechleadership.com">Email</a>
       <a href="tel:+19544392199">Call</a>
     </div>
     <div class="fmeta">© <span id="yr"></span> David J. Cowen</div>
@@ -559,7 +637,7 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
 
 <script>
 (function(){
-  var phrases=['digital & business transformation','M&A diligence, integration & divestitures','assimilating disparate engineering teams','process & delivery transformation','technology & platform modernization','fractional & interim leadership'];
+  var phrases=["laying a startup's first foundation",'fast-tracking growth to the next stage','a full bench of engineering & product experts','M&A diligence, integration & divestitures','digital transformation & modernization','fractional & interim leadership'];
   var el=document.getElementById('typed');
   var pi=0,ci=0,deleting=false;
   function tick(){
