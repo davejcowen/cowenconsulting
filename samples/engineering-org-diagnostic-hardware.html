@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering Org Diagnostic — Helios Robotics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F4F6;--surface:#fff;--ink:#15171D;--ink-soft:#3A3E48;--muted:#646A77;--line:rgba(21,23,29,.10);--line-soft:rgba(21,23,29,.06);--accent:#1F6BFF;--accent-ink:#0F4FD6;--accent-soft:#E5EEFF;--signal:#0A7567;--signal-soft:#E3F7F3;--high:#B42318;--high-bg:#FBE3E0;--med:#B54708;--med-bg:#FEF0C7;--disp:'Bricolage Grotesque',system-ui,sans-serif;--sans:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:1080px;margin:0 auto;padding:0 26px}
+.bar{display:inline-flex;gap:3px;vertical-align:middle}
+.bar i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.bar .f{background:var(--accent)}.bar .h{background:linear-gradient(90deg,var(--accent) 50%,var(--accent-soft) 50%)}.bar .e{background:var(--accent-soft)}
+.chip{font-family:var(--mono);font-size:.66rem;font-weight:500;padding:3px 9px;border-radius:20px;letter-spacing:.03em;white-space:nowrap}
+.p-high,.chip.p-high{color:var(--high)}.chip.p-high{background:var(--high-bg)}
+.p-med,.chip.p-med{color:var(--med)}.chip.p-med{background:var(--med-bg)}
+.p-low,.chip.p-low{color:var(--signal)}.chip.p-low{background:var(--signal-soft)}
+/* hero */
+.hero{background:var(--ink);color:#fff;padding:64px 0 56px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:42px 42px;-webkit-mask-image:radial-gradient(ellipse 70% 80% at 85% 10%,#000,transparent 70%);mask-image:radial-gradient(ellipse 70% 80% at 85% 10%,#000,transparent 70%)}
+.hero .page{position:relative;z-index:1}
+.brand{font-family:var(--mono);font-size:.8rem;letter-spacing:.12em;color:#b9b2f5;text-transform:uppercase;display:flex;align-items:center;gap:9px;margin-bottom:30px}
+.brand .dot{width:8px;height:8px;border-radius:50%;background:var(--signal)}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:#8f86e8;margin-bottom:14px}
+.hero h1{font-family:var(--disp);font-weight:600;font-size:clamp(2rem,4.6vw,3.1rem);line-height:1.05;letter-spacing:-.03em;max-width:18ch}
+.hero .prep{margin-top:18px;font-size:1.05rem;color:rgba(255,255,255,.8)}
+.hero .prep b{color:#fff}
+.meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 40px;margin-top:30px;max-width:760px}
+.mrow{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-top:1px solid rgba(255,255,255,.12);font-size:.86rem}
+.mrow span{color:#9aa0ad}.mrow b{color:#fff;font-weight:500;text-align:right}
+/* sections */
+section{padding:52px 0;border-bottom:1px solid var(--line-soft)}
+.tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:10px}
+h2.sec{font-family:var(--disp);font-weight:600;font-size:1.7rem;letter-spacing:-.02em;margin-bottom:8px}
+.sec-intro{color:var(--ink-soft);max-width:70ch;margin-bottom:26px}
+.lead{font-size:1.18rem;line-height:1.5;color:var(--ink-soft);max-width:62ch;margin-bottom:8px}
+.lead b{color:var(--ink)}
+h3.mini{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:24px 0 10px}
+ul.clean{list-style:none;display:grid;gap:7px}
+ul.clean li{padding-left:20px;position:relative;color:var(--ink-soft);font-size:.97rem}
+ul.clean li::before{content:'▪';position:absolute;left:2px;color:var(--accent)}
+ul.clean li b{color:var(--ink)}
+.risks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:8px 0 4px}
+.risk{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--high);border-radius:12px;padding:18px}
+.risk .rk-m{font-family:var(--disp);font-weight:600;font-size:1.5rem;color:var(--high)}
+.risk h4{font-family:var(--disp);font-size:1.05rem;margin:6px 0 6px}
+.risk p{font-size:.9rem;color:var(--muted);line-height:1.5}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.tile{background:var(--accent-soft);border-radius:12px;padding:18px;text-align:center}
+.tile .tn{font-family:var(--disp);font-weight:600;font-size:1.5rem;color:var(--accent-ink);letter-spacing:-.01em}
+.tile .tl{font-size:.8rem;color:var(--muted);margin-top:4px}
+/* scorecard */
+table.score{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+table.score th{background:var(--ink);color:#fff;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;font-weight:500;text-align:left;padding:11px 14px}
+table.score td{padding:10px 14px;border-top:1px solid var(--line-soft);font-size:.92rem}
+table.score td.dn{color:var(--ink)} table.score .num{font-weight:600;text-align:center} table.score .tgt{color:var(--muted);text-align:center}
+table.score .gap{text-align:center;font-weight:600} table.score td:nth-child(4),table.score td:nth-child(6){text-align:center}
+table.score tr.ov td{background:var(--bg);font-weight:600;border-top:2px solid var(--line)}
+table.score tr.ov .num{color:var(--accent-ink)}
+.legend{margin-top:10px;font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+/* domains */
+.domain{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:0 24px 22px;margin-bottom:18px;overflow:hidden}
+.dhead{display:flex;align-items:center;gap:14px;margin:0 -24px 14px;padding:14px 24px;background:var(--ink);color:#fff;flex-wrap:wrap}
+.dhead .dnum{font-family:var(--mono);font-size:.8rem;color:#8f86e8}
+.dhead h3{font-family:var(--disp);font-weight:600;font-size:1.2rem;flex:1}
+.dhead .dscore{font-family:var(--mono);font-size:.82rem;color:#b9b2f5}
+.situation{color:var(--ink-soft);font-size:.97rem;margin-bottom:14px}
+table.dimtbl{width:100%;border-collapse:collapse;margin-bottom:14px}
+table.dimtbl th{font-family:var(--mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:5px 10px;background:var(--bg)}
+table.dimtbl td{padding:6px 10px;border-top:1px solid var(--line-soft);font-size:.88rem;color:var(--ink-soft)}
+table.dimtbl .num{font-weight:600;color:var(--ink);text-align:center} table.dimtbl .tgt{color:var(--muted);text-align:center}
+table.dimtbl td:nth-child(4){text-align:center}
+.findings{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:6px}
+.fcol h5{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+.fcol.str h5{color:var(--signal)} .fcol.gap h5{color:var(--high)} .recs h5{color:var(--accent-ink);font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;margin:10px 0 7px}
+.fcol ul,.recs ul{list-style:none;display:grid;gap:6px}
+.fcol li,.recs li{padding-left:18px;position:relative;font-size:.9rem;color:var(--ink-soft);line-height:1.5}
+.fcol li::before,.recs li::before{content:'▪';position:absolute;left:2px;color:var(--accent)}
+.recs li b{color:var(--ink);font-family:var(--mono);font-size:.78rem}
+.impact{margin-top:10px;font-size:.9rem;color:var(--ink-soft);padding-top:10px;border-top:1px solid var(--line-soft)}
+.impact b{color:var(--ink)}
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.phase{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;border-top:4px solid var(--muted)}
+.phase.now{border-top-color:var(--high)}.phase.next{border-top-color:var(--med)}.phase.later{border-top-color:var(--signal)}
+.ph-h{font-family:var(--disp);font-weight:600;font-size:1.05rem}
+.phase.now .ph-h{color:var(--high)}.phase.next .ph-h{color:var(--med)}.phase.later .ph-h{color:var(--signal)}
+.ph-s{font-size:.84rem;color:var(--muted);margin:4px 0 12px;font-style:italic}
+.phase ul{list-style:none;display:grid;gap:8px}
+.phase li{padding-left:18px;position:relative;font-size:.9rem;color:var(--ink-soft);line-height:1.5}
+.phase li::before{content:'▪';position:absolute;left:2px;color:var(--accent)}
+.delivery{margin-top:22px;background:var(--ink);color:rgba(255,255,255,.86);border-radius:14px;padding:24px 26px}
+.delivery .tag{color:#8f86e8} .delivery p{font-size:.98rem;line-height:1.55}
+footer{padding:34px 0 50px;color:var(--muted);font-size:.82rem}
+footer .disc{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:18px}
+footer .disc b{color:var(--ink)}
+@media(max-width:860px){.risks,.tiles,.road,.findings,.meta{grid-template-columns:1fr}.tiles{grid-template-columns:repeat(2,1fr)}table.score td:nth-child(3),table.score th:nth-child(3){display:none}}
+@media print{.hero::before{display:none}section{padding:26px 0;break-inside:avoid}.domain,.risk,.phase{break-inside:avoid}body{background:#fff}}
+</style></head><body>
+
+<header class="hero"><div class="page">
+  <div class="brand"><svg width="24" height="24" viewBox="0 0 48 48" aria-hidden="true" style="flex-shrink:0"><defs><clipPath id="dbm"><rect x="2" y="2" width="44" height="44" rx="12"/></clipPath></defs><rect x="2" y="2" width="44" height="44" rx="12" fill="#1F6BFF"/><g clip-path="url(#dbm)" stroke="#fff" stroke-opacity="0.18" stroke-width="0.9"><line x1="11" y1="2" x2="11" y2="46"/><line x1="18" y1="2" x2="18" y2="46"/><line x1="25" y1="2" x2="25" y2="46"/><line x1="32" y1="2" x2="32" y2="46"/><line x1="39" y1="2" x2="39" y2="46"/><line x1="2" y1="11" x2="46" y2="11"/><line x1="2" y1="18" x2="46" y2="18"/><line x1="2" y1="25" x2="46" y2="25"/><line x1="2" y1="32" x2="46" y2="32"/><line x1="2" y1="39" x2="46" y2="39"/></g><path d="M13 33 L24 26 L35 33" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 27 L24 20 L35 27" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 21 L24 14.5 L34 21" fill="none" stroke="#0FB9A6" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>DTech Leadership Consulting</div>
+  <div class="eyebrow">Engineering Org Diagnostic</div>
+  <h1>Engineering Organization Assessment &amp; Improvement Plan</h1>
+  <p class="prep">Prepared for <b>Helios Robotics</b></p>
+  <div class="meta"><div class="mrow"><span>Engagement</span><b>3-week engineering diagnostic · 11 domains</b></div><div class="mrow"><span>Basis</span><b>38 interviews · firmware/cloud systems &amp; metrics review · artifact audit</b></div><div class="mrow"><span>Prepared by</span><b>David J. Cowen — Principal, DTech Leadership Consulting</b></div><div class="mrow"><span>Status</span><b>Illustrative sample — fictional client &amp; data</b></div></div>
+</div></header>
+
+<main class="page">
+
+<section>
+  <div class="tag">Executive Summary</div>
+  <p class="lead"><b>Helios is exceptional at building the robot — but it is not yet built to run a connected fleet business. Overall engineering maturity is 2.6 of 5.</b> Hardware and firmware engineering are rigorous, safety-minded, and high-craftsmanship. The modern software, cloud, and data muscle the subscription strategy depends on is underbuilt. Three systemic gaps — the inability to ship firmware fast and safely (no CI/CD or OTA), a data/cloud platform that cannot yet run a fleet at scale, and device &amp; OT security exposure as products connect — put the connected-fleet plan at direct risk. None require heroic spend; all require system, not effort.</p>
+  <h3 class="mini">What's working</h3><ul class="clean"><li>World-class hardware and firmware discipline: rigorous design reviews, safety-critical rigor, and deep embedded craftsmanship that competitors cannot easily copy.</li><li>A genuine product and category position in industrial/warehouse robotics, with real domain credibility and customer trust earned on reliability.</li><li>Leadership that asked for an independent read — the appetite to build the software side properly is already here, ahead of the crisis rather than after it.</li></ul>
+  <h3 class="mini">The three systemic risks</h3>
+  <div class="risks"><div class="risk"><div class="rk-m">1.6–2.0</div><h4>Can&#x27;t ship firmware fast or safely — no CI/CD or OTA</h4><p>Firmware releases are hand-built and physically flashed; with no automated pipeline and no over-the-air update path, a connected fleet cannot be patched, improved, or secured at scale.</p></div><div class="risk"><div class="rk-m">2.0–2.5</div><h4>The data &amp; cloud platform can&#x27;t run a fleet business</h4><p>Telemetry is siloed per product line and the cloud fleet-management product is immature — the platform cannot yet support the observability, billing, and analytics a subscription model requires.</p></div><div class="risk"><div class="rk-m">2.2–2.4</div><h4>Device &amp; OT security gaps widen as products connect</h4><p>Robots designed for isolated plant networks are being put online with weak device identity, secrets, and update integrity — every connected unit becomes attack surface inside a customer&#x27;s operations.</p></div></div>
+  <h3 class="mini">Top recommendations (cross-domain)</h3><ul class="clean"><li><b>Build a real embedded delivery pipeline.</b> Stand up CI/CD for firmware and cloud and a secure OTA update path (Domains 06, 01). This is the single lever that turns a fleet of boxes into a fleet you can run, patch, and improve remotely.</li><li><b>Make the fleet data platform first-class.</b> Unify per-product telemetry into one fleet data/observability platform that can carry billing, analytics, and subscription metrics (10, 06).</li><li><b>Secure the connected device.</b> Establish device identity, signed updates, secrets management, and a product-security program for connected and OT-adjacent units (09).</li><li><b>Build the software-side product muscle.</b> Stand up product management and outcome ownership for the cloud/subscription product, not just the hardware roadmap (04, 11).</li><li><b>Close the cloud/IoT talent gap.</b> Hire and grow cloud, data, and DevOps leadership to complement deep embedded strength, and reduce key-person risk in firmware (08).</li></ul>
+  <h3 class="mini">Expected impact (3–4 quarters)</h3>
+  <div class="tiles"><div class="tile"><div class="tn">weeks → days</div><div class="tl">Firmware release cadence</div></div><div class="tile"><div class="tn">0% → 100%</div><div class="tl">Connected fleet OTA-enabled</div></div><div class="tile"><div class="tn">+ attach rate</div><div class="tl">Subscriptions per unit shipped</div></div><div class="tile"><div class="tn">proven</div><div class="tl">Fleet recoverability &amp; rollback</div></div></div>
+</section>
+
+<section>
+  <div class="tag">Maturity Scorecard</div>
+  <h2 class="sec">Eleven domains, one scale</h2>
+  <p class="sec-intro">Gap = target − current; priority follows the gap. Overall maturity of 2.6 reflects competent execution without the systems that make it repeatable.</p>
+  <table class="score"><thead><tr><th>#  Domain</th><th>Current</th><th>Target</th><th>Maturity</th><th>Gap</th><th>Priority</th></tr></thead>
+    <tbody><tr>
+      <td class="dn"><b>01</b>&nbsp; Software Engineering</td>
+      <td class="num">2.9</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-low">+0.6</td>
+      <td><span class="chip p-low">Maintain</span></td></tr><tr>
+      <td class="dn"><b>02</b>&nbsp; Engineering Process / SDLC</td>
+      <td class="num">2.7</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-med">+0.8</td>
+      <td><span class="chip p-med">Medium</span></td></tr><tr>
+      <td class="dn"><b>03</b>&nbsp; Quality &amp; Test</td>
+      <td class="num">3.3</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-low">+0.2</td>
+      <td><span class="chip p-low">Maintain</span></td></tr><tr>
+      <td class="dn"><b>04</b>&nbsp; Product Management</td>
+      <td class="num">2.4</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-med">+1.1</td>
+      <td><span class="chip p-med">Medium</span></td></tr><tr>
+      <td class="dn"><b>05</b>&nbsp; Technical Support / CS</td>
+      <td class="num">2.8</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-low">+0.7</td>
+      <td><span class="chip p-low">Maintain</span></td></tr><tr>
+      <td class="dn"><b>06</b>&nbsp; DevOps / Infrastructure</td>
+      <td class="num">1.9</td><td class="tgt">4.0</td>
+      <td><span class="bar"><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-high">+2.1</td>
+      <td><span class="chip p-high">High</span></td></tr><tr>
+      <td class="dn"><b>07</b>&nbsp; Program / Project Management (PMO)</td>
+      <td class="num">2.6</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-med">+0.9</td>
+      <td><span class="chip p-med">Medium</span></td></tr><tr>
+      <td class="dn"><b>08</b>&nbsp; Engineering Org &amp; Talent</td>
+      <td class="num">2.8</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-low">+0.7</td>
+      <td><span class="chip p-low">Maintain</span></td></tr><tr>
+      <td class="dn"><b>09</b>&nbsp; Security &amp; Compliance</td>
+      <td class="num">2.3</td><td class="tgt">4.0</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-high">+1.7</td>
+      <td><span class="chip p-high">High</span></td></tr><tr>
+      <td class="dn"><b>10</b>&nbsp; Architecture / Data</td>
+      <td class="num">2.5</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-med">+1.0</td>
+      <td><span class="chip p-med">Medium</span></td></tr><tr>
+      <td class="dn"><b>11</b>&nbsp; R&amp;D Portfolio &amp; Strategy</td>
+      <td class="num">2.4</td><td class="tgt">3.5</td>
+      <td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td>
+      <td class="gap p-med">+1.1</td>
+      <td><span class="chip p-med">Medium</span></td></tr><tr class="ov">
+  <td class="dn"><b>OVERALL</b></td><td class="num">2.6</td><td class="tgt">3.5</td>
+  <td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td><td class="gap">+0.9</td><td>—</td></tr></tbody></table>
+  <div class="legend">● full level &nbsp; ◐ half &nbsp; ○ to target &nbsp;&nbsp;·&nbsp;&nbsp; Priority: High ≥1.3 gap · Medium 0.8–1.2 · Maintain &lt;0.8</div>
+</section>
+
+<section>
+  <div class="tag">Domain Findings &amp; Recommendations</div>
+  <h2 class="sec">Where the work is</h2>
+  <p class="sec-intro">Each domain shows its dimension scores, what is working, the gaps and the risk it tends to hide, the recommended moves, and the outcome those moves are expected to produce.</p>
+  <article class="domain">
+      <div class="dhead"><span class="dnum">01</span><h3>Software Engineering</h3>
+        <span class="dscore">2.9 → 3.5</span><span class="chip p-low">Maintain</span></div>
+      <p class="situation">Embedded craftsmanship is genuinely strong — disciplined firmware engineers who write careful, deterministic code — but the modern software tooling and flow practices the cloud product needs are thin, and delivery health is invisible because no one watches flow.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Code health &amp; quality</td><td class="num">3.2</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Delivery flow</td><td class="num">2.4</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Engineering practices</td><td class="num">3.1</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Technical craftsmanship &amp; standards</td><td class="num">3.4</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Developer experience &amp; tooling</td><td class="num">2.4</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Deep embedded/firmware expertise; careful, review-heavy code on safety-critical paths.</li><li>High craftsmanship and a culture of getting it right the first time on hardware-coupled code.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Modern tooling lags: branch/build practices vary, and the cloud codebase lacks the rigor the firmware side has.</li><li>Hidden risk — craft without cadence: the firmware team&#x27;s diligence hides the fact that idea-to-fleet lead time is unmeasured and bottlenecked on manual builds and physical flashing, so speed depends on individuals, not the system.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R01.1</b> Instrument flow metrics (lead time, cycle time, build/flash frequency, change-fail) across firmware and cloud.</li><li><b>R01.2</b> Extend the firmware team&#x27;s engineering standards (review SLA, branch policy, definition of done) to the cloud codebase.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Lead time visible across firmware and cloud; modern practices match embedded rigor.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">02</span><h3>Engineering Process / SDLC</h3>
+        <span class="dscore">2.7 → 3.5</span><span class="chip p-med">Medium</span></div>
+      <p class="situation">Hardware-driven gate discipline is real — design reviews and milestone gates are respected — but software work enters through many doors and the cloud roadmap changes mid-flight against a fixed hardware cadence.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Requirements &amp; intake gating</td><td class="num">2.6</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Planning &amp; estimation</td><td class="num">2.8</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Workflow &amp; WIP management</td><td class="num">2.7</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Release management</td><td class="num">2.6</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Process governance &amp; improvement</td><td class="num">2.8</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Mature hardware milestone gates (EVT/DVT/PVT) that the whole company respects.</li><li>Engineers who understand disciplined, gated process and want it applied to software too.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>No real Definition of Ready on the software side; cloud scope is absorbed mid-cycle against a fixed hardware schedule.</li><li>Hidden risk — hardware cadence masking software slip: the org plans to the hardware calendar, so software and firmware commitments look on-track right up until a connected-feature date is blown.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R02.1</b> Install a software Definition of Ready and a single intake path before commitment, decoupled from the hardware gate.</li><li><b>R02.2</b> Stand up a capacity-aware software delivery cadence with a visible commitment line alongside the hardware milestones.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Software commitments as predictable as the hardware gate calendar.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">03</span><h3>Quality &amp; Test</h3>
+        <span class="dscore">3.3 → 3.5</span><span class="chip p-low">Maintain</span></div>
+      <p class="situation">This is a genuine strength: safety-critical rigor, real hardware-in-the-loop discipline, and a quality culture earned in a domain where a defect can injure someone. The gap is automation reach into cloud and OTA paths.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Test strategy &amp; coverage</td><td class="num">3.5</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i></span></td></tr><tr><td>Test automation</td><td class="num">3.0</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Defect management &amp; economics</td><td class="num">3.4</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Environments &amp; test data</td><td class="num">3.3</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Quality culture &amp; shift-left</td><td class="num">3.3</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Strong safety-critical test discipline and hardware-in-the-loop rigor on the robot itself.</li><li>A quality culture that treats escaped defects as serious — a hard thing to build and already present.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — automation strong on the robot, thin on the fleet: the device is rigorously tested while the cloud, telemetry, and OTA paths it now depends on are validated mostly by hand.</li><li>Test environments for the connected stack (cloud + fleet of devices) are scarce, slowing safe iteration.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R03.1</b> Extend automated regression and integration testing to cloud and OTA paths; track escaped-defect rate end-to-end.</li><li><b>R03.2</b> Invest in fleet-scale test environments (device farm + cloud staging) to validate connected features safely.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Maintain the robot&#x27;s quality bar while extending it across the connected stack.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">04</span><h3>Product Management</h3>
+        <span class="dscore">2.4 → 3.5</span><span class="chip p-med">Medium</span></div>
+      <p class="situation">Hardware product management is competent and roadmap-driven, but the software/subscription side operates with weak ownership — few connected features are tied to a measured customer or revenue outcome.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Customer discovery &amp; insight</td><td class="num">2.2</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Roadmap &amp; prioritization</td><td class="num">2.4</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Outcome orientation</td><td class="num">2.2</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Product–engineering collaboration</td><td class="num">2.8</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Lifecycle &amp; portfolio management</td><td class="num">2.4</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Credible hardware product management with deep customer and domain knowledge.</li><li>A clear hardware roadmap that the company and customers understand.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — no owner for the subscription P&amp;L: the cloud product is shipped as a hardware accessory, so attach rate, activation, and retention of the subscription are nobody&#x27;s measured outcome.</li><li>Software discovery and prioritization are ad hoc; the fleet product follows the hardware roadmap rather than its own.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R04.1</b> Stand up dedicated software/subscription product management with outcome ownership (attach rate, activation, retention).</li><li><b>R04.2</b> Adopt outcome-based roadmapping for the connected product, with continuous discovery and a transparent prioritization model.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Subscription product owned and measured, not bundled as an afterthought.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">05</span><h3>Technical Support / CS</h3>
+        <span class="dscore">2.8 → 3.5</span><span class="chip p-low">Maintain</span></div>
+      <p class="situation">Field support for hardware is competent and customers are well-served on the robot, but the connected product introduces new failure modes the support model and tooling are not yet built for.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Support operations &amp; SLAs</td><td class="num">3.2</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Escalation &amp; engineering handoff</td><td class="num">2.8</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Knowledge management &amp; self-service</td><td class="num">2.5</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Voice-of-customer loop</td><td class="num">2.7</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Proactive support &amp; telemetry</td><td class="num">2.8</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Strong field-service and hardware support; knowledgeable engineers who know the machines.</li><li>Healthy customer relationships built on hardware reliability and responsiveness.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — field service blind to the fleet: support can fix a robot on-site but cannot see device telemetry or push a remote fix, so connectivity issues become truck rolls and the voice-of-customer loop back into firmware/cloud is broken.</li><li>Limited remote diagnostics and self-service; connected-product issue volume will scale with the fleet.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R05.1</b> Close the loop: a standing support→firmware/cloud triage with recurring connected-issue themes feeding the roadmap.</li><li><b>R05.2</b> Equip support with fleet telemetry and remote diagnostics so connectivity issues are resolved without a truck roll.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Connected-fleet issues diagnosed and fixed remotely; truck rolls decoupled from fleet growth.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">06</span><h3>DevOps / Infrastructure</h3>
+        <span class="dscore">1.9 → 4.0</span><span class="chip p-high">High</span></div>
+      <p class="situation">The single biggest weakness and the linchpin of the connected-fleet strategy. There is effectively no CI/CD for firmware or cloud, no over-the-air update path, and minimal fleet observability — robots are built and flashed by hand, and once shipped they cannot be updated or watched at scale.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>CI/CD pipeline maturity</td><td class="num">1.6</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Cloud &amp; infrastructure-as-code</td><td class="num">2.0</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Reliability &amp; observability</td><td class="num">1.9</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Incident management</td><td class="num">2.2</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Cost management (FinOps)</td><td class="num">1.8</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Hardware build/release discipline that proves the team can run rigorous, gated processes when given a system.</li><li>Early cloud footprint on a modern provider to build the fleet platform on.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — a fleet that cannot be patched: with no OTA pipeline, every shipped robot is frozen at its flashed firmware, so a security fix or feature improvement requires physical access to each unit — a disqualifier for a connected, subscription-managed fleet.</li><li>No CI/CD for firmware or cloud; fleet observability and FinOps are absent, and releases are manual and inconsistent.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R06.1</b> Build CI/CD for firmware and cloud and a secure, staged OTA update path with rollback — treat this as the program&#x27;s spine.</li><li><b>R06.2</b> Stand up fleet observability (device + cloud telemetry, alerting) and cost ownership for the growing cloud footprint.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Firmware shippable in days with safe OTA rollout/rollback across the entire connected fleet.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">07</span><h3>Program / Project Management (PMO)</h3>
+        <span class="dscore">2.6 → 3.5</span><span class="chip p-med">Medium</span></div>
+      <p class="situation">Hardware program management is disciplined and milestone-driven, but coordinating firmware, cloud, and hardware as one connected-product program is informal, and software status is narrative rather than data.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Planning &amp; roadmap predictability</td><td class="num">2.5</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Dependency &amp; risk management</td><td class="num">2.5</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Status transparency &amp; reporting</td><td class="num">2.6</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Resource &amp; capacity management</td><td class="num">2.7</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Governance &amp; methodology fit</td><td class="num">2.7</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Strong hardware program management with respected milestone discipline.</li><li>Program leads who understand gated execution and want it applied across firmware and cloud.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — three calendars, one product: hardware, firmware, and cloud are tracked separately, so cross-stream dependencies for a connected feature surface late and status reads green until integration.</li><li>Software delivery predictability (committed vs delivered) is not reported to leadership the way hardware milestones are.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R07.1</b> Stand up integrated program management spanning hardware, firmware, and cloud with a live dependency/risk register.</li><li><b>R07.2</b> Report software/firmware delivery predictability to leadership monthly, alongside hardware milestone status.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Connected-product slips visible weeks earlier; one integrated program forecast.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">08</span><h3>Engineering Org &amp; Talent</h3>
+        <span class="dscore">2.8 → 3.5</span><span class="chip p-low">Maintain</span></div>
+      <p class="situation">A strong, engaged embedded organization with a clear talent gap: the cloud, data, and DevOps muscle the fleet business needs is under-built, and deep firmware knowledge sits with a few key people.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Org structure &amp; team topology</td><td class="num">3.1</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Hiring &amp; onboarding</td><td class="num">2.6</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Retention &amp; engagement</td><td class="num">3.3</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Career growth &amp; performance</td><td class="num">2.6</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Leadership bench &amp; succession</td><td class="num">2.4</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Engaged, high-retention embedded and hardware teams with rare, deep expertise.</li><li>A workable structure and a strong engineering culture inherited from the hardware side.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — cloud/IoT talent gap plus firmware key-person risk: the org is staffed to build robots, not to run a fleet, and critical firmware and electrical knowledge sits undocumented in one or two heads whose departure would stall a product line.</li><li>Career ladders and onboarding for cloud/software roles are informal, lengthening ramp for the new muscle being built.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R08.1</b> Hire and grow cloud, data, and DevOps leadership to complement embedded strength; build that capability deliberately.</li><li><b>R08.2</b> Map firmware/hardware key-person risk and fund knowledge transfer and a second line of embedded leaders.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Cloud/IoT capability built out; reduced single-points-of-failure in firmware.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">09</span><h3>Security &amp; Compliance</h3>
+        <span class="dscore">2.3 → 4.0</span><span class="chip p-high">High</span></div>
+      <p class="situation">Robots designed for isolated plant networks are now being connected, and the device &amp; OT security posture has not caught up — weak device identity, unmanaged secrets, and unsigned updates turn every connected unit into attack surface inside a customer&#x27;s operations.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Application security (secure SDLC)</td><td class="num">2.2</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Vulnerability &amp; patch management</td><td class="num">2.3</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Identity &amp; access management</td><td class="num">2.4</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Compliance &amp; certifications</td><td class="num">2.2</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Incident response &amp; resilience</td><td class="num">2.4</td><td class="tgt">4.0</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Awareness at leadership that connecting the fleet changes the threat model materially.</li><li>Basic perimeter and cloud-provider security controls on the nascent cloud platform.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — air-gap assumptions baked into connected products: devices built assuming an isolated network ship with weak identity, hardcoded or unmanaged secrets, and no firmware-signing or update integrity, so connecting them exposes both the device and the customer&#x27;s OT environment.</li><li>No secure-SDLC or product-security program: SAST/DAST, dependency scanning, and device threat modeling are absent.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R09.1</b> Establish device identity, signed firmware/OTA, and secrets management; stand up a product-security program for connected units.</li><li><b>R09.2</b> Embed secure-SDLC (SAST/DAST, dependency and secrets scanning), threat-model the connected fleet, and run an IR tabletop for a device-fleet compromise.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Connected devices have strong identity, signed updates, and a managed product-security posture.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">10</span><h3>Architecture / Data</h3>
+        <span class="dscore">2.5 → 3.5</span><span class="chip p-med">Medium</span></div>
+      <p class="situation">System architecture for the robot is sound and well-reasoned, but the data and cloud platform lag badly — telemetry is siloed per product line and there is no unified fleet platform to carry the analytics, billing, and observability a subscription business depends on.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>System architecture &amp; scalability</td><td class="num">3.1</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Technical debt management</td><td class="num">2.0</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Data platform &amp; analytics</td><td class="num">2.1</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Integration &amp; APIs</td><td class="num">2.7</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Architecture governance &amp; standards</td><td class="num">2.6</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Sound, well-reasoned system/embedded architecture proven across multiple hardware generations.</li><li>Engineers who reason carefully about interfaces and constraints — strong architectural instincts.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — siloed telemetry, no fleet platform: each product line stores device data its own way, so there is no single source of truth for the fleet and no platform to build subscription analytics, billing, or fleet-wide observability on.</li><li>Technical debt in the cloud/data layer is real but uncatalogued; the data platform lags the fleet/AI ambition.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R10.1</b> Define a target-state fleet data platform: unified telemetry, a fleet system-of-record, and a path to subscription analytics and billing.</li><li><b>R10.2</b> Create a quantified tech-debt register for the cloud/data layer with budgeted paydown each quarter.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>One fleet data platform ready to carry subscription analytics, billing, and observability.</i></p></div>
+    </article><article class="domain">
+      <div class="dhead"><span class="dnum">11</span><h3>R&amp;D Portfolio &amp; Strategy</h3>
+        <span class="dscore">2.4 → 3.5</span><span class="chip p-med">Medium</span></div>
+      <p class="situation">Engineering investment is managed as a hardware roadmap, not as a portfolio. The connected-fleet and software bets the board is funding are starved as run-the-hardware-business and firefighting silently consume capacity.</p>
+      <table class="dimtbl"><thead><tr><th>Dimension</th><th>Now</th><th>Target</th><th>Maturity</th></tr></thead>
+        <tbody><tr><td>Investment allocation (run/grow/transform)</td><td class="num">2.1</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>ROI &amp; business alignment</td><td class="num">2.3</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Roadmap-to-strategy linkage</td><td class="num">2.5</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Innovation &amp; IP</td><td class="num">2.8</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="h"></i><i class="e"></i><i class="e"></i></span></td></tr><tr><td>Financial discipline (P&amp;L-aware)</td><td class="num">2.3</td><td class="tgt">3.5</td><td><span class="bar"><i class="f"></i><i class="f"></i><i class="e"></i><i class="e"></i><i class="e"></i></span></td></tr></tbody></table>
+      <div class="findings">
+        <div class="fcol str"><h5>Strengths</h5><ul><li>Leadership that wants engineering tied to the connected-fleet business outcomes.</li><li>A genuine innovation seam — connected fleet, fleet analytics, autonomy/AI — to invest behind.</li></ul></div>
+        <div class="fcol gap"><h5>Gaps &amp; hidden risk</h5><ul><li>Hidden risk — software bets starved by the hardware machine: the connected-fleet strategy looks funded in the deck, but capacity is consumed by hardware sustaining work and unplanned firmware fixes, so the software/subscription bets are funded on paper and starved in practice.</li><li>No run/grow/transform visibility or ROI discipline across hardware, firmware, and cloud; engineering is not P&amp;L-aware.</li></ul></div>
+      </div>
+      <div class="recs"><h5>Recommendations</h5><ul><li><b>R11.1</b> Classify all R&amp;D spend run/grow/transform across hardware, firmware, and cloud; defend a target mix tied to the fleet strategy.</li><li><b>R11.2</b> Introduce ROI/business-case gating on major investments and make engineering P&amp;L-aware, especially for the subscription bets.</li></ul>
+        <p class="impact"><b>Expected impact:</b> <i>Capacity protected for the connected-fleet bets the strategy depends on.</i></p></div>
+    </article>
+</section>
+
+<section>
+  <div class="tag">Prioritized Roadmap</div>
+  <h2 class="sec">Now · Next · Later</h2>
+  <p class="sec-intro">Sequenced by impact and dependency, not by domain. The first 90 days buy predictability and unblock revenue; later phases compound on that base.</p>
+  <div class="road"><div class="phase now"><div class="ph-h">NOW  ·  0–90 days</div><div class="ph-s">Build the spine — pipeline, updateability, and the worst security gaps</div><ul><li>Stand up CI/CD for firmware and cloud and a first secure OTA path with rollback (06, 01).</li><li>Close the worst device-security gaps — device identity, secrets, firmware signing (09).</li><li>Install a software Definition of Ready and intake path decoupled from the hardware gate (02).</li><li>Map firmware/hardware key-person risk and start knowledge transfer; begin cloud/DevOps hiring (08).</li></ul></div><div class="phase next"><div class="ph-h">NEXT  ·  Q2–Q3</div><div class="ph-s">Build the systems — fleet platform, security program, and software product muscle</div><ul><li>Unify per-product telemetry into one fleet data/observability platform with cost ownership (10, 06).</li><li>Extend automated regression and integration testing to cloud and OTA paths; build fleet test environments (03).</li><li>Stand up secure-SDLC and a product-security program; threat-model the connected fleet (09).</li><li>Establish software/subscription product management with outcome ownership; integrated program management (04, 07).</li></ul></div><div class="phase later"><div class="ph-h">LATER  ·  Q4+</div><div class="ph-s">Optimize &amp; compound — run the connected fleet as a business</div><ul><li>Operate the fleet platform for subscription analytics, billing, and fleet-wide observability (10).</li><li>Classify R&amp;D run/grow/transform across hardware/firmware/cloud and protect the connected-fleet bets (11).</li><li>Build out cloud/IoT career ladders, leadership bench, and onboarding for the new muscle (08).</li><li>Move leading domains from Defined to Managed — metrics-driven improvement across the connected stack (all).</li></ul></div></div>
+  <div class="delivery"><div class="tag">Suggested delivery model</div><p>A focused 9-month transformation led by a fractional CTO (1–2 days/week) with two internal workstream owners — one for the embedded delivery pipeline &amp; OTA (06/01/03), one for fleet platform &amp; device security (10/09). Software product and portfolio moves (04/11/08) run at the leadership cadence. This is system-building, not staff augmentation: the goal is an organization that can build the robot and run the connected fleet — and sustain these gains without us.</p></div>
+</section>
+
+<footer>
+  <div class="disc"><b>Sample document.</b> Helios Robotics and all figures herein are fictional and illustrative — created to demonstrate the format and depth of a DTech Leadership Consulting Engineering Org Diagnostic.</div>
+  DTech Leadership Consulting &nbsp;·&nbsp; Confidential — prepared for Helios Robotics &nbsp;·&nbsp; © 2026 David J. Cowen
+</footer>
+</main></body></html>

@@ -9,6 +9,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="assets/site.webmanifest">
 <meta name="theme-color" content="#1F6BFF">
 <style>
 :root{
@@ -118,11 +123,17 @@ section.block{padding:90px 0}
 .pstep .pn{font-family:var(--mono);font-size:.82rem;color:#8f86e8;margin-bottom:16px;padding-top:16px;border-top:2px solid rgba(255,255,255,.16)}
 .pstep h4{font-family:var(--display);font-weight:600;font-size:1.2rem;margin-bottom:9px}
 .pstep p{color:rgba(255,255,255,.62);font-size:.93rem;line-height:1.6}
-.proc-cta{margin-top:42px;padding-top:30px;border-top:1px solid rgba(255,255,255,.12);display:flex;align-items:center;gap:18px 24px;flex-wrap:wrap}
-.proc-cta .pc-q{font-size:1.04rem;color:#fff;font-weight:500}
-.proc-cta .pc-s{font-size:.93rem;color:rgba(255,255,255,.6);flex:1;min-width:200px}
-.proc-cta a{font-family:var(--sans);font-weight:500;font-size:.95rem;background:#fff;color:var(--ink);padding:12px 22px;border-radius:10px;transition:transform .12s,background .15s,color .15s;white-space:nowrap}
-.proc-cta a:hover{background:var(--signal);color:#fff;transform:translateY(-2px)}
+.proc-cta{margin-top:42px;padding-top:30px;border-top:1px solid rgba(255,255,255,.12)}
+.proc-cta .pc-q{display:block;font-size:1.08rem;color:#fff;font-weight:500;margin-bottom:5px}
+.proc-cta .pc-s{display:block;font-size:.93rem;color:rgba(255,255,255,.62);margin-bottom:20px;max-width:64ch}
+.pc-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pc-choices a{display:flex;flex-direction:column;gap:3px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:11px;padding:15px 16px;transition:transform .12s,background .15s,border-color .15s}
+.pc-choices a:hover{background:#fff;border-color:#fff;transform:translateY(-2px)}
+.pc-choices a b{font-family:var(--sans);font-weight:600;font-size:.97rem;color:#fff;transition:color .15s;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pc-choices a b::after{content:'↗';color:var(--signal);font-weight:400}
+.pc-choices a span{font-family:var(--mono);font-size:.72rem;color:rgba(255,255,255,.5);transition:color .15s}
+.pc-choices a:hover b{color:var(--ink)}
+.pc-choices a:hover span{color:var(--muted)}
 
 .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:56px;align-items:start}
 .about-body p{font-size:1.08rem;color:var(--ink-soft);line-height:1.7;margin-bottom:20px}
@@ -227,6 +238,7 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
   .svc-grid{grid-template-columns:1fr}
   .stage-grid{grid-template-columns:1fr}
   .bench-grid{grid-template-columns:1fr}
+  .pc-choices{grid-template-columns:1fr}
   .work-grid{grid-template-columns:1fr}
   .proc{padding:44px 26px;border-radius:16px}
   .proc-steps{grid-template-columns:1fr 1fr;gap:24px}
@@ -555,8 +567,12 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
         </div>
         <div class="proc-cta">
           <span class="pc-q">See what you'd receive.</span>
-          <span class="pc-s">A full sample Engineering Org Diagnostic — maturity scorecard, findings, and a prioritized roadmap.</span>
-          <a href="samples/engineering-org-diagnostic.html" target="_blank" rel="noopener">View a sample diagnostic →</a>
+          <span class="pc-s">Full sample Engineering Org Diagnostics — maturity scorecard, findings, and a prioritized roadmap. Pick the world closest to yours:</span>
+          <div class="pc-choices">
+            <a href="samples/engineering-org-diagnostic.html" target="_blank" rel="noopener"><b>Building automation / IoT</b><span>Meridian Building Systems</span></a>
+            <a href="samples/engineering-org-diagnostic-fintech.html" target="_blank" rel="noopener"><b>Fintech SaaS</b><span>Northwind Pay</span></a>
+            <a href="samples/engineering-org-diagnostic-hardware.html" target="_blank" rel="noopener"><b>Hardware &amp; robotics</b><span>Helios Robotics</span></a>
+          </div>
         </div>
       </div>
     </div>
