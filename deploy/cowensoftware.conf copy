@@ -21,7 +21,8 @@ server {
   # is verified; once it is, switch cowensoftware over to the redirect block below.
   server_name
     dtechleadership.com  www.dtechleadership.com
-   
+    cowensoftware.com    www.cowensoftware.com;
+
   root  /var/www/cowensoftware;
   index index.html;
 
@@ -45,11 +46,11 @@ server {
 # server_name above, uncomment this block, and re-deploy. It 301-redirects the
 # old domain (and the www host) to https://dtechleadership.com, keeping the path.
 # ---------------------------------------------------------------------------
- server {
-   listen 80;
-   listen [::]:80;
-   server_name
-     cowensoftware.com  www.cowensoftware.com
-     www.dtechleadership.com;
-   return 301 https://dtechleadership.com$request_uri;
- }
+# server {
+#   listen 80;
+#   listen [::]:80;
+#   server_name
+#     cowensoftware.com  www.cowensoftware.com
+#     www.dtechleadership.com;
+#   return 301 https://dtechleadership.com$request_uri;
+# }
