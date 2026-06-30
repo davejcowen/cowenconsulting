@@ -225,6 +225,18 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
 .disc h4::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--signal);flex-shrink:0}
 .disc p{color:var(--muted);font-size:.86rem;line-height:1.5}
 
+/* Experience x AI band */
+.ai-band{background:var(--ink);color:#fff;border-radius:22px;padding:60px 54px;position:relative;overflow:hidden}
+.ai-band::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:40px 40px;-webkit-mask-image:radial-gradient(ellipse 70% 80% at 88% 12%,#000,transparent 70%);mask-image:radial-gradient(ellipse 70% 80% at 88% 12%,#000,transparent 70%)}
+.ai-inner{position:relative;z-index:1}
+.ai-band .sec-tag{color:#9DBEFF}
+.ai-band .sec-title{color:#fff}
+.ai-lead{font-size:1.12rem;color:rgba(255,255,255,.74);max-width:62ch;margin-top:14px;line-height:1.6}
+.ai-points{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 34px;margin-top:44px}
+.ai-pt .ap-i{font-family:var(--mono);font-size:.78rem;color:#9DBEFF;margin-bottom:10px;padding-top:14px;border-top:2px solid rgba(255,255,255,.16)}
+.ai-pt h4{font-family:var(--display);font-weight:600;font-size:1.24rem;letter-spacing:-.01em;margin-bottom:8px}
+.ai-pt p{color:rgba(255,255,255,.64);font-size:.96rem;line-height:1.6}
+
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
 
@@ -238,6 +250,8 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
   .svc-grid{grid-template-columns:1fr}
   .stage-grid{grid-template-columns:1fr}
   .bench-grid{grid-template-columns:1fr}
+  .ai-band{padding:40px 26px;border-radius:16px}
+  .ai-points{grid-template-columns:1fr;gap:24px}
   .pc-choices{grid-template-columns:1fr}
   .work-grid{grid-template-columns:1fr}
   .proc{padding:44px 26px;border-radius:16px}
@@ -272,6 +286,7 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
     <nav class="nav-links" id="navlinks">
       <a href="#expertise">What we do</a>
       <a href="#bench">Team</a>
+      <a href="#ai">AI</a>
       <a href="#track">Track record</a>
       <a href="#journey">M&amp;A</a>
       <a href="#process">How we work</a>
@@ -289,7 +304,7 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
   <div class="wrap hero-inner">
     <span class="eyebrow"><span class="pulse"></span>A team of engineering &amp; product experts · startup → midsize → enterprise</span>
     <h1 class="hero-title">Engineering growth,<br>built from the <span class="em">keyboard up.</span></h1>
-    <p class="hero-sub">DTech Leadership Consulting is a team of senior operators and domain experts who help companies engineer growth, whether you're a startup laying your first foundation or an enterprise leading a hard transition. We bring the right specialists for the moment, from engineering and product to hardware, mechanical, manufacturing, QA, and PMO. Behind that is 25 years of experience and a $1.1B+ portfolio. Founded by Dave Cowen.</p>
+    <p class="hero-sub">DTech Leadership Consulting is a team of senior operators and domain experts who help companies engineer growth, whether you're a startup laying your first foundation or an enterprise leading a hard transition. We bring the right specialists for the moment, from engineering and product to hardware, mechanical, manufacturing, QA, and PMO. Behind that is 25 years of experience, a $1.1B+ portfolio, and modern AI that helps your team move faster. Founded by Dave Cowen.</p>
     <div class="term"><span class="mono" style="color:var(--muted)">available&nbsp;for:</span>&nbsp;<span class="typed" id="typed"></span><span class="cursor"></span></div>
     <div class="hero-cta">
       <a href="#contact" class="btn-primary">Start a conversation</a>
@@ -413,6 +428,40 @@ footer{border-top:1px solid var(--line-soft);padding:38px 0;background:var(--sur
       <div class="disc reveal"><h4>Program management</h4><p>PMO, planning, dependencies, and predictable delivery.</p></div>
       <div class="disc reveal"><h4>DevOps &amp; infrastructure</h4><p>CI/CD, cloud, reliability, and cost.</p></div>
       <div class="disc reveal"><h4>Data center &amp; thermal</h4><p>DCIM, building automation, and high-density cooling.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="ai" style="padding-top:20px">
+  <div class="wrap">
+    <div class="ai-band reveal">
+      <div class="ai-inner">
+        <span class="sec-tag">Experience &times; AI</span>
+        <h2 class="sec-title">Decades of judgment, accelerated by AI.</h2>
+        <p class="ai-lead">AI on its own is noise. Experience on its own is slow. We pair 25 years of operator judgment with modern AI, so you reach the right answer faster and act on it sooner. For a startup on a budget, that combination is how you move like a much bigger team.</p>
+        <div class="ai-points">
+          <div class="ai-pt">
+            <div class="ap-i">01 · Diagnose</div>
+            <h4>Weeks, not quarters</h4>
+            <p>Our AI-assisted diagnostic compresses a full engineering assessment into days, so you spend your time fixing the real problems instead of hunting for them.</p>
+          </div>
+          <div class="ai-pt">
+            <div class="ap-i">02 · Operate</div>
+            <h4>An AI-assisted PMO</h4>
+            <p>We put AI to work tracking delivery, surfacing risks early, and turning raw project data into clear status, with our experienced leaders making the calls.</p>
+          </div>
+          <div class="ai-pt">
+            <div class="ap-i">03 · Automate</div>
+            <h4>Less toil, more output</h4>
+            <p>Testing, code review, documentation, and reporting are increasingly automatable. We help your team put AI on the grind and spend its hours on the work that actually matters.</p>
+          </div>
+          <div class="ai-pt">
+            <div class="ap-i">04 · Decide</div>
+            <h4>Evidence over opinion</h4>
+            <p>AI does the analysis at a scale no single consultant can match. Seasoned leaders interpret it and decide, so you get speed and judgment together rather than one at the cost of the other.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
